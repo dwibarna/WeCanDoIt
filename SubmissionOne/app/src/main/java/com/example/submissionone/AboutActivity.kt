@@ -39,15 +39,14 @@ class AboutActivity : AppCompatActivity() {
     private fun dataIntent() {
         val dataMajor = intent.getParcelableExtra<User>(EXTRA_DATA) as User
         Glide.with(this)
-            .load(dataMajor.Avatar)
+            .load(dataMajor.avatarUser)
             .apply(RequestOptions().override(150,150))
             .into(binding.ivAvatarAbout)
-        binding.tvUsernameAbout.text = dataMajor.Username
-        binding.tvFollowersAbout.text =dataMajor.Followers
-        binding.tvFollowingAbout.text =dataMajor.Following
-        binding.tvRepositoryAbout.text= dataMajor.Repository
-        binding.tvNameAbout.text =dataMajor.Name
-        binding.tvLocationAbout.text = dataMajor.Location
-        binding.tvCompanyAbout.text = dataMajor.Company
+        binding.tvUsernameAbout.text = dataMajor.usernameUser
+        binding.tvFollowersAbout.text =dataMajor.followersUser
+        binding.tvFollowingAbout.text =dataMajor.followingUser
+        binding.tvRepositoryAbout.text= dataMajor.repositoryUser
+        binding.tvLocationAbout.text = dataMajor.locationUser
+        binding.tvCompanyAbout.text = dataMajor.companyUser
     }
 }

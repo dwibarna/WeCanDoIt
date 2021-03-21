@@ -20,13 +20,13 @@ class UserAdapter(private var listUser:ArrayList<User>):
         fun bind(user:User){
             with(binding){
                 Glide.with(itemView.context)
-                    .load(user.Avatar)
+                    .load(user.avatarUser)
                     .apply(RequestOptions().override(100,100))
                     .into(ivAvatarList)
 
-                tvUsernameList.text = user.Username
-                tvFollowersList.text = user.Followers
-                tvFollowingList.text = user.Following
+                tvUsernameList.text = user.usernameUser
+                tvFollowersList.text = user.followersUser
+                tvFollowingList.text = user.followingUser
             }
         }
 
@@ -42,19 +42,20 @@ class UserAdapter(private var listUser:ArrayList<User>):
         holder.bind(listUser[position])
         val data = listUser[position]
         holder.itemView.setOnClickListener {
-            val userIntent = User(
-                data.Username,
-                data.Name,
-                data.Avatar,
-                data.Location,
-                data.Company,
-                data.Repository,
-                data.Followers,
-                data.Following
+ /*         val userIntent = User(
+                data.usernameUser,
+                data.avatarUser,
+                data.locationUser,
+                data.companyUser,
+                data.repositoryUser,
+                data.followersUser,
+                data.followingUser
             )
             val intent = Intent(it.context,AboutActivity::class.java)
             intent.putExtra(AboutActivity.EXTRA_DATA,userIntent)
             it.context.startActivity(intent)
+        */
+
         }
     }
 

@@ -1,16 +1,19 @@
 package com.example.submissionone
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class User(
-    var Username:String?,
-    var Name:String?,
-    var Avatar:Int?,
-    var Location:String?,
-    var Company:String?,
-    var Repository:String?,
-    var Followers:String?,
-    var Following:String?
+        @SerializedName("login")
+        var usernameUser:String?=null,
+        @SerializedName("avatar_url")
+        var avatarUser:String?=null,
+        @SerializedName("location")
+        var locationUser:String?=null,
+        var companyUser:String?=null,
+        var repositoryUser:String?=null,
+        var followersUser:String?=null,
+        var followingUser:String?=null
 ):Parcelable
