@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_margin="10dp"
+    android:layout_height="120dp"
+    android:background="@drawable/background_rectangle"
+    android:layout_width="370dp"
+    android:layout_gravity="center_horizontal"
+    app:cardCornerRadius="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:id="@+id/ivAvatarList"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/user1" />
+
+    <TextView
+        android:id="@+id/tvUsernameList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userid"
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="135dp"/>
+    <TextView
+        android:id="@+id/tvFollowersList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mengikuti"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="80dp"/>
+
+    <TextView
+        android:id="@+id/tvFollowingList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pengikut"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="80dp"/>
+
+
+
+</androidx.cardview.widget.CardView>
