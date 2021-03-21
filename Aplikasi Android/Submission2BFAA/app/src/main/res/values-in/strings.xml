@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GitHub</string>
+    <string name="following">Diikuti:</string>
+    <string name="followers">Pengikut:</string>
+    <string name="username">nama user</string>
+    <string name="location">lokasi:</string>
+    <string name="company">Perusahaan:</string>
+    <string name="repository">Repository:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Followers">pengikut</string>
+    <string name="Following">diikuti</string>
+    <string name="change_language_settings">Ganti Bahasa</string>
+    <string name="settings">Pengaturan</string>
+    <string name="reminder">Pengingat</string>
+    <string name="detail_user">Detail Pengguna</string>
+</resources>
