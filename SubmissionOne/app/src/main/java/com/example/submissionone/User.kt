@@ -12,8 +12,12 @@ data class User(
         var avatarUser:String?=null,
         @SerializedName("location")
         var locationUser:String?=null,
+        @SerializedName("company")
         var companyUser:String?=null,
+        @SerializedName("public_repos")
         var repositoryUser:String?=null,
+        @SerializedName("followers")
         var followersUser:String?=null,
+        @SerializedName("following")
         var followingUser:String?=null
 ):Parcelable

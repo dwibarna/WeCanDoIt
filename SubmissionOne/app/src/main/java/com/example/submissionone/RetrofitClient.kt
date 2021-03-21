@@ -14,4 +14,15 @@ object RetrofitClient {
 
         retrofit.create(ApiRetrofit::class.java)
     }
+    val secondInstance:ApiDetailRetrofit by lazy {
+        val secondRetrofit = Retrofit.Builder()
+            .baseUrl(URL_MAIN)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        secondRetrofit.create(ApiDetailRetrofit::class.java)
+    }
 }
+
+
+

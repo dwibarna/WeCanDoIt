@@ -1,6 +1,5 @@
 package com.example.submissionone
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +39,7 @@ class UserAdapter(private var listUser:ArrayList<User>):
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listUser[position])
-        val data = listUser[position]
+      //  val data = listUser[position]
         holder.itemView.setOnClickListener {
  /*         val userIntent = User(
                 data.usernameUser,
