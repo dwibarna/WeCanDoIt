@@ -44,35 +44,25 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivAvatarAbout"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="116dp"
         android:src="@drawable/user1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnShare"
-        android:layout_width="41dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/ic_baseline_share_24"
-        app:layout_constraintStart_toEndOf="@+id/tvUsernameAbout"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatarAbout"
-        android:contentDescription="@string/share" />
 
     <TextView
         android:id="@+id/tvUsernameAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:text="@string/sobarna11"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivAvatarAbout" />
 
@@ -110,48 +100,72 @@
         app:layout_constraintTop_toBottomOf="@+id/tvUsernameAbout" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:cardCornerRadius="8dp"
+        android:layout_width="262dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="35dp"
         android:background="@drawable/background_rectangle"
-        android:layout_marginTop="57dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvRepositoryAbout">
+        app:cardCornerRadius="8dp"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatarAbout"
+        app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <TextView
             android:id="@+id/tvNameAbout"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:textSize="24sp"
-            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:text="@string/name_dwi_aji_sobarna"
-            android:layout_marginStart="20dp"/>
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvLocationAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="85dp"
             android:text="@string/location_serang_city"
-            android:textSize="24sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvCompanyAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:text="@string/company_sobarna_farm"
-            android:textSize="24sp"
-            android:textColor="@color/black"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="45dp"
+            android:text="@string/company_sobarna_farm"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
 
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepositoryAbout">
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

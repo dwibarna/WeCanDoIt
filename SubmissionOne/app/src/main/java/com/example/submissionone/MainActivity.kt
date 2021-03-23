@@ -2,6 +2,7 @@ package com.example.submissionone
 
 import android.os.Bundle
 import android.view.View
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var userAdapter: UserAdapter
     private var list = ArrayList<User>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -24,10 +27,30 @@ class MainActivity : AppCompatActivity() {
 
         showRecyclerList()
         getDataModel()
+        searchUser()
 
       showList(userAdapter)
-     //   getRecycler()
-      //  getDetailRecycler()
+
+    }
+
+    private fun searchUser() {
+        binding.svUser.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query!=null){
+                    list.clear()
+                    binding.svUser.clearFocus()
+                    userViewModel.searchUserAPI(query)
+                    showLoading(true)
+                    showList(userAdapter)
+                }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+
+        })
     }
 
     private fun getDataModel() {

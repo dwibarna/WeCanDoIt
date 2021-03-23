@@ -11,6 +11,7 @@ import com.example.submissionone.databinding.GithubListBinding
 class UserAdapter(private var listUser:ArrayList<User>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
+    private lateinit var userViewModel: UserViewModel
     fun setData(itemList:ArrayList<User>){
         listUser.clear()
         listUser.addAll(itemList)
@@ -27,8 +28,7 @@ class UserAdapter(private var listUser:ArrayList<User>) :
                     .into(ivAvatarList)
 
                 tvUsernameList.text = user.usernameUser
-                tvFollowersList.text = user.followersUser
-                tvFollowingList.text = user.followingUser
+
             }
         }
 
@@ -42,22 +42,25 @@ class UserAdapter(private var listUser:ArrayList<User>) :
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listUser[position])
-        val data = listUser[position]
+        listUser[position]
         holder.itemView.setOnClickListener {
 
-            val dataIntent = User(
-                    "${data.usernameUser}",
-                    "${data.avatarUser}",
-                    "Location:  ${data.locationUser}",
-                    "Company:  ${data.companyUser}",
-                    "Repository:\n${data.repositoryUser}",
-                    "Followers:\n${data.followersUser}",
-                    "Following:\n${data.followingUser}"
-            )
-            val intent = Intent(it.context,AboutActivity::class.java)
-            intent.putExtra(AboutActivity.EXTRA_DATA,dataIntent)
-            it.context.startActivity(intent)
 
+
+            val username = User()
+            val useruser = username.usernameUser
+
+            if (useruser != null) {
+                userViewModel.detailRecycle(useruser,it.context)
+                val intents =  Intent(it.context,AboutActivity::class.java)
+                it.context.startActivity(intents)
+            }else{val intent = Intent(it.context,AboutActivity::class.java)
+                it.context.startActivity(intent)
+            }
+/*
+
+
+ */
 
  /*         val userIntent = User(
                 data.usernameUser,
