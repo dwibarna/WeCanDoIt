@@ -1,16 +1,20 @@
-package com.example.submissionone
+package com.example.submissionone.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.submissionone.adapter.UserAdapter
+import com.example.submissionone.viewmodel.UserViewModel
+import com.example.submissionone.model.User
 import com.example.submissionone.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var userViewModel:UserViewModel
+    private lateinit var userViewModel: UserViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var userAdapter: UserAdapter
     private var list = ArrayList<User>()
@@ -26,10 +30,24 @@ class MainActivity : AppCompatActivity() {
         ).get(UserViewModel::class.java)
 
         showRecyclerList()
+        clickToDetail()
         getDataModel()
         searchUser()
 
       showList(userAdapter)
+
+    }
+
+    private fun clickToDetail() {
+
+        userAdapter.setOnItemClick(object : UserAdapter.OnItemClickCallBack {
+            override fun onItemClick(data: User) {
+                val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                intent.putExtra(DetailActivity.EXTRA_DATA,data.usernameUser)
+                startActivity(intent)
+            }
+
+        })
 
     }
 
@@ -39,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 if (query!=null){
                     list.clear()
                     binding.svUser.clearFocus()
-                    userViewModel.searchUserAPI(query)
+                    userViewModel.searchUserAPI(query,applicationContext)
                     showLoading(true)
                     showList(userAdapter)
                 }
@@ -54,7 +72,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getDataModel() {
-        userViewModel.makeRecycleData(applicationContext)
+        userViewModel.getData(applicationContext)
         showLoading(true)
     }
 

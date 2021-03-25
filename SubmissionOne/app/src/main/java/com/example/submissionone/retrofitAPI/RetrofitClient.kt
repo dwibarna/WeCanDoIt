@@ -1,4 +1,4 @@
-package com.example.submissionone
+package com.example.submissionone.retrofitAPI
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
