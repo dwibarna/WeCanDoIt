@@ -38,13 +38,18 @@ class DetailActivity : AppCompatActivity() {
             this, ViewModelProvider.NewInstanceFactory()
         ).get(UserViewModel::class.java)
 
-
-        sectionAdapterFunction()
         getDetailData()
+        sectionAdapterFunction()
+
     }
 
     private fun sectionAdapterFunction() {
-        val sectionPagerAdapter = SectionPagerAdapter(this)
+
+        val username = intent.getStringExtra(EXTRA_DATA)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_DATA,username)
+
+        val sectionPagerAdapter = SectionPagerAdapter(this,bundle)
         val viewPager:ViewPager2 = binding.viewPagerDetail
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = binding.tlDetail
@@ -60,6 +65,9 @@ class DetailActivity : AppCompatActivity() {
     private fun getDetailData() {
 
         val username = intent.getStringExtra(EXTRA_DATA)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_DATA,username)
+        Log.v(bundle.toString(),"kta lita")
 
         if (username != null) {
             userViewModel.getDetailData(username,this@DetailActivity)

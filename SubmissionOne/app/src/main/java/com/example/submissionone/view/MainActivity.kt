@@ -2,15 +2,19 @@ package com.example.submissionone.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.submissionone.R
 import com.example.submissionone.adapter.UserAdapter
-import com.example.submissionone.viewmodel.UserViewModel
-import com.example.submissionone.model.User
 import com.example.submissionone.databinding.ActivityMainBinding
+import com.example.submissionone.model.User
+import com.example.submissionone.viewmodel.UserViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +41,22 @@ class MainActivity : AppCompatActivity() {
       showList(userAdapter)
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_settings){
+            val menuIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(menuIntent)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
 
     private fun clickToDetail() {
 

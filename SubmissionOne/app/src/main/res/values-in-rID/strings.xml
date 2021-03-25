@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash">Splash</string>
+    <string name="dicoding_submission2">DICODING SUBMISSION 2</string>
+    <string name="github_user">GITHUB USER</string>
+    <string name="app_name">Submission One</string>
+    <string name="dicoding_submission">SUBMISSION DICODING</string>
+    <string name="list_of_github_user">Daftar Pengguna Github</string>
+    <string name="userid">Nama Pengguna</string>
+    <string name="pengikut">Pengikut</string>
+    <string name="mengikuti">Mengikuti</string>
+    <string name="pekerjaan">Pekerjaan</string>
+    <string name="name_dwi_aji_sobarna">Nama : Dwi Aji Sobarna</string>
+    <string name="location_serang_city">Lokasi: SERANG CITY</string>
+    <string name="company_sobarna_farm">Perusahaan: Sobarna Farm</string>
+    <string name="sobarna11">SOBARNA11</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="settings">Pengaturan</string>
+</resources>

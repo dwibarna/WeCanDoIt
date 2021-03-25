@@ -13,9 +13,8 @@
     <string name="location_serang_city">Location: SERANG CITY</string>
     <string name="company_sobarna_farm">Company: Sobarna Farm</string>
     <string name="sobarna11">SOBARNA11</string>
-    <string name="share">share</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings">Settings</string>
 </resources>
 
 

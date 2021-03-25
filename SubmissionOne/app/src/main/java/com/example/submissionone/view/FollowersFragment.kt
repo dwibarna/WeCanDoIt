@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submissionone.adapter.FollowersAdapter
 import com.example.submissionone.databinding.FragmentFollowersBinding
-import com.example.submissionone.model.DetailUser
 import com.example.submissionone.model.FollowersUser
 import com.example.submissionone.viewmodel.FollowersViewModel
 
@@ -48,7 +47,7 @@ class FollowersFragment : Fragment() {
     }
 
     private fun getDataFollowers() {
-        val username = DetailUser().usernameUser
+        val username = arguments?.getString(DetailActivity.EXTRA_DATA).toString()
         Log.v(username,"COBA CEK")
 
 

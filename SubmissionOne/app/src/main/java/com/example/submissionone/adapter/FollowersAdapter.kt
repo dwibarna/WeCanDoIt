@@ -25,7 +25,6 @@ class FollowersAdapter(private var followersList :ArrayList<FollowersUser>)
                         .load(followers.avatarUser)
                         .apply(RequestOptions().override(100,100))
                         .into(ivAvatarList)
-
                 tvUsernameList.text = followers.usernameUser
             }
         }
