@@ -15,7 +15,6 @@ class FollowersAdapter(private var followersList :ArrayList<FollowersUser>)
         followersList.clear()
         followersList.addAll(itemList)
         notifyDataSetChanged()
-
     }
 
     inner class FollowersViewHolder(private val binding: GithubListBinding): RecyclerView.ViewHolder(binding.root) {

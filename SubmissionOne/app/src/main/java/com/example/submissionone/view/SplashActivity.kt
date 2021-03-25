@@ -18,12 +18,10 @@ class SplashActivity : AppCompatActivity() {
             WindowManager.LayoutParams.ANIMATION_CHANGED,
             WindowManager.LayoutParams.FIRST_APPLICATION_WINDOW
         )
-
         android.os.Handler(mainLooper).postDelayed({
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         },3000)
-
     }
 }

@@ -16,7 +16,6 @@ interface ApiRetrofit {
     @Headers("Authorization: token efb84bdbe1810822147b62f5eaf5248d6301d5ba")
     fun getDetail(@Path("username")username:String):Call<DetailUser>
 
-
     @GET("search/users")
     @Headers("Authorization: token efb84bdbe1810822147b62f5eaf5248d6301d5ba")
     fun getSearchAPI(@Query("q")query:String):Call<DataSearchUser>

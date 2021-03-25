@@ -10,7 +10,9 @@ import com.example.submissionone.databinding.GithubListBinding
 
 class UserAdapter(private var listUser:ArrayList<User>) :
     RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+
     private lateinit var onItemClickCallBack: OnItemClickCallBack
+
     fun setData(itemList:ArrayList<User>){
         listUser.clear()
         listUser.addAll(itemList)
@@ -22,7 +24,6 @@ class UserAdapter(private var listUser:ArrayList<User>) :
         this.onItemClickCallBack = onItemClickCallBack
     }
 
-
     inner class UserViewHolder(private val binding: GithubListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User){
             with(binding){
@@ -30,17 +31,12 @@ class UserAdapter(private var listUser:ArrayList<User>) :
                     .load(user.avatarUser)
                     .apply(RequestOptions().override(100,100))
                     .into(ivAvatarList)
-
                 tvUsernameList.text = user.usernameUser
-
                 binding.root.setOnClickListener {
                     onItemClickCallBack.onItemClick(user)
                 }
-
             }
         }
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

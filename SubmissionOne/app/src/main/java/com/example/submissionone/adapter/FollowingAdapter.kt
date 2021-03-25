@@ -15,7 +15,6 @@ class FollowingAdapter(private var followingList :ArrayList<FollowingUser>)
         followingList.clear()
         followingList.addAll(itemList)
         notifyDataSetChanged()
-
     }
 
     inner class FollowingViewHolder(private val binding: GithubListBinding):RecyclerView.ViewHolder(binding.root) {
@@ -25,7 +24,6 @@ class FollowingAdapter(private var followingList :ArrayList<FollowingUser>)
                         .load(following.avatarUser)
                         .apply(RequestOptions().override(100,100))
                         .into(ivAvatarList)
-
                 tvUsernameList.text = following.usernameUser
             }
         }

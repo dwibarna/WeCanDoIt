@@ -13,12 +13,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowingViewModel:ViewModel() {
-
-
-
         private val listFollowing  = MutableLiveData<ArrayList<FollowingUser>>()
-
-
 
         fun getListDataFollowing(username:String,context: Context){
             val retroInstanceFollowing = RetrofitClient.getRetroInstance().create(ApiRetrofit::class.java)
@@ -30,21 +25,10 @@ class FollowingViewModel:ViewModel() {
                 override fun onFailure(call: Call<ArrayList<FollowingUser>>, t: Throwable) {
                     Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
                 }
-
             })
-
-
         }
 
         fun getListFollowing(): LiveData<ArrayList<FollowingUser>> {
             return listFollowing
         }
-
-
-
-
-
-
-
-
 }

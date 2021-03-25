@@ -1,7 +1,6 @@
 package com.example.submissionone.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,22 +15,16 @@ import com.example.submissionone.viewmodel.FollowersViewModel
 
 class FollowersFragment : Fragment() {
 
-
     private var _binding: FragmentFollowersBinding?=null
     private lateinit var followersViewModel: FollowersViewModel
     private lateinit var followersAdapter: FollowersAdapter
     private val list = ArrayList<FollowersUser>()
-
     private val binding get() = _binding!!
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFollowersBinding.inflate(inflater,container,false)
-
         return binding.root
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,19 +32,13 @@ class FollowersFragment : Fragment() {
                 FollowersViewModel::class.java
         )
 
-
         showFollowersRecycleList()
         getDataFollowers()
         showFollowersList(followersAdapter)
-
     }
 
     private fun getDataFollowers() {
         val username = arguments?.getString(DetailActivity.EXTRA_DATA).toString()
-        Log.v(username,"COBA CEK")
-
-
-
         followersViewModel.getListDataFollowers(username,requireContext().applicationContext)
     }
 
@@ -59,9 +46,7 @@ class FollowersFragment : Fragment() {
         followersViewModel.getListFollowers().observe(viewLifecycleOwner,{ followersList ->
             if(followersList != null){
                 adapter.setDataFollowers(followersList)
-
             }
-
         })
     }
 
@@ -71,6 +56,4 @@ class FollowersFragment : Fragment() {
         followersAdapter.notifyDataSetChanged()
         binding.rvFollowersList.adapter =followersAdapter
     }
-
-
 }

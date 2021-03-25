@@ -15,40 +15,30 @@ import com.example.submissionone.viewmodel.FollowingViewModel
 
 class FollowingFragment : Fragment() {
 
-
     private var _binding: FragmentFollowingBinding?=null
     private lateinit var followingViewModel: FollowingViewModel
     private lateinit var followingAdapter: FollowingAdapter
     private val list = ArrayList<FollowingUser>()
-
     private val binding get() = _binding!!
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentFollowingBinding.inflate(inflater,container,false)
-
         return binding.root
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
                 FollowingViewModel::class.java
         )
-
-
         showFollowingRecycleList()
         getDataFollowing()
         showFollowingList(followingAdapter)
-
     }
 
     private fun getDataFollowing() {
         val username = arguments?.getString(DetailActivity.EXTRA_DATA).toString()
         Log.v(username,"COBA CEK")
-
         followingViewModel.getListDataFollowing(username,requireContext().applicationContext)
     }
 
@@ -56,9 +46,7 @@ class FollowingFragment : Fragment() {
         followingViewModel.getListFollowing().observe(viewLifecycleOwner,{ followingList ->
             if(followingList != null){
                 adapter.setDataFollowing(followingList)
-
             }
-
         })
     }
 
@@ -68,6 +56,4 @@ class FollowingFragment : Fragment() {
         followingAdapter.notifyDataSetChanged()
         binding.rvFollowingList.adapter =followingAdapter
     }
-
-
 }

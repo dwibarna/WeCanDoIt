@@ -2,7 +2,7 @@ package com.example.submissionone.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
@@ -10,8 +10,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.submissionone.R
 import com.example.submissionone.adapter.SectionPagerAdapter
-import com.example.submissionone.viewmodel.UserViewModel
 import com.example.submissionone.databinding.ActivityDetailBinding
+import com.example.submissionone.viewmodel.UserViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -25,7 +25,6 @@ class DetailActivity : AppCompatActivity() {
         )
     }
 
-
     private lateinit var userViewModel: UserViewModel
 
     private lateinit var binding:ActivityDetailBinding
@@ -38,9 +37,20 @@ class DetailActivity : AppCompatActivity() {
             this, ViewModelProvider.NewInstanceFactory()
         ).get(UserViewModel::class.java)
 
+
         getDetailData()
         sectionAdapterFunction()
 
+
+    }
+
+
+    private fun showLoading(state:Boolean){
+        if(state){
+            binding.pbDetailUser.visibility = View.VISIBLE
+        }else{
+            binding.pbDetailUser.visibility = View.GONE
+        }
     }
 
     private fun sectionAdapterFunction() {
@@ -67,13 +77,15 @@ class DetailActivity : AppCompatActivity() {
         val username = intent.getStringExtra(EXTRA_DATA)
         val bundle = Bundle()
         bundle.putString(EXTRA_DATA,username)
-        Log.v(bundle.toString(),"kta lita")
+
 
         if (username != null) {
             userViewModel.getDetailData(username,this@DetailActivity)
-
-            Log.v(username,"ADA ISI")
+            showLoading(false)
+        }else{
+            showLoading(true)
         }
+
         userViewModel.getUserDetail().observe(this,{
             if (it != null){
                 binding.apply {
@@ -88,8 +100,6 @@ class DetailActivity : AppCompatActivity() {
                     tvRepositoryAbout.text = "Repository:\n${it.repositoryUser}"
                     tvFollowersAbout.text = "Followers:\n${it.followersUser}"
                     tvFollowingAbout.text = "Following:\n${it.followingUser}"
-
-
 
                 }
             }

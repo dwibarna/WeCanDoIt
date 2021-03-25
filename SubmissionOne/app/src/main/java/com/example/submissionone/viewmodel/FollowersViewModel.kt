@@ -17,26 +17,17 @@ class FollowersViewModel: ViewModel() {
 
     private val listFollowers  = MutableLiveData<ArrayList<FollowersUser>>()
 
-
-
     fun getListDataFollowers(username:String,context: Context){
         val retroInstanceFollowers = RetrofitClient.getRetroInstance().create(ApiRetrofit::class.java)
         retroInstanceFollowers.getFollowersAPI(username).enqueue(object : Callback<ArrayList<FollowersUser>>{
             override fun onResponse(call: Call<ArrayList<FollowersUser>>, response: Response<ArrayList<FollowersUser>>) {
                 listFollowers.postValue(response.body())
-                Log.v(response.toString(),"makeRecycle")
-                Log.v(call.toString(),"call")
             }
-
             override fun onFailure(call: Call<ArrayList<FollowersUser>>, t: Throwable) {
                 Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
             }
-
         })
-
-
     }
-
     fun getListFollowers():LiveData<ArrayList<FollowersUser>>{
         return listFollowers
     }

@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var userAdapter: UserAdapter
     private var list = ArrayList<User>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         clickToDetail()
         getDataModel()
         searchUser()
-
-      showList(userAdapter)
+        showList(userAdapter)
 
     }
 
@@ -52,23 +50,17 @@ class MainActivity : AppCompatActivity() {
             val menuIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
             startActivity(menuIntent)
         }
-
         return super.onOptionsItemSelected(item)
     }
 
-
-
     private fun clickToDetail() {
-
         userAdapter.setOnItemClick(object : UserAdapter.OnItemClickCallBack {
             override fun onItemClick(data: User) {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_DATA,data.usernameUser)
                 startActivity(intent)
             }
-
         })
-
     }
 
     private fun searchUser() {
@@ -83,11 +75,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 return false
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 return true
             }
-
         })
     }
 
@@ -97,12 +87,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showRecyclerList() {
-
         binding.rvUserList.layoutManager = LinearLayoutManager(this)
         userAdapter = UserAdapter(list)
         userAdapter.notifyDataSetChanged()
         binding.rvUserList.adapter = userAdapter
-
     }
 
     private fun showLoading(state:Boolean){
