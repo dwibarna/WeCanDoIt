@@ -31,9 +31,19 @@ class FollowingFragment : Fragment() {
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
                 FollowingViewModel::class.java
         )
+
+        showLoading(true)
         showFollowingRecycleList()
         getDataFollowing()
         showFollowingList(followingAdapter)
+    }
+
+    private fun showLoading(state:Boolean){
+        if(state){
+            binding.pbFollowingUser.visibility = View.VISIBLE
+        }else{
+            binding.pbFollowingUser.visibility = View.GONE
+        }
     }
 
     private fun getDataFollowing() {
@@ -46,6 +56,7 @@ class FollowingFragment : Fragment() {
         followingViewModel.getListFollowing().observe(viewLifecycleOwner,{ followingList ->
             if(followingList != null){
                 adapter.setDataFollowing(followingList)
+                showLoading(false)
             }
         })
     }

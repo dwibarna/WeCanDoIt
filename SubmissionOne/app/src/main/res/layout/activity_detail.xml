@@ -124,31 +124,32 @@
         <TextView
             android:id="@+id/tvNameAbout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_gravity="top"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:text="@string/name_dwi_aji_sobarna"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
 
         <TextView
             android:id="@+id/tvLocationAbout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="85dp"
             android:text="@string/location_serang_city"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            />
 
         <TextView
             android:id="@+id/tvCompanyAbout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_height="20dp"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="45dp"
+            android:layout_marginTop="45dp"
             android:text="@string/company_sobarna_farm"
             android:textColor="@color/black"
             android:textSize="14sp" />

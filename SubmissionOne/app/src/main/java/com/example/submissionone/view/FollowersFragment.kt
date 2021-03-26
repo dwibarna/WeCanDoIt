@@ -32,9 +32,19 @@ class FollowersFragment : Fragment() {
                 FollowersViewModel::class.java
         )
 
+        showLoading(true)
         showFollowersRecycleList()
         getDataFollowers()
         showFollowersList(followersAdapter)
+    }
+
+
+    private fun showLoading(state:Boolean){
+        if(state){
+            binding.pbFollowersUser.visibility = View.VISIBLE
+        }else{
+            binding.pbFollowersUser.visibility = View.GONE
+        }
     }
 
     private fun getDataFollowers() {
@@ -46,6 +56,7 @@ class FollowersFragment : Fragment() {
         followersViewModel.getListFollowers().observe(viewLifecycleOwner,{ followersList ->
             if(followersList != null){
                 adapter.setDataFollowers(followersList)
+                showLoading(false)
             }
         })
     }
