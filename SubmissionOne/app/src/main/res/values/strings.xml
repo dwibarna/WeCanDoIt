@@ -13,6 +13,12 @@
     <string name="location_serang_city">Location: SERANG CITY</string>
     <string name="company_sobarna_farm">Company: Sobarna Farm</string>
     <string name="sobarna11">SOBARNA11</string>
+    <string name="location_string">Location: </string>
+    <string name="name_string">Name: </string>
+    <string name="company_string">Company: </string>
+    <string name="repository_string">Repository: \n</string>
+    <string name="followers_string">Followers: \n</string>
+    <string name="following_string">Following: \n</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="settings">Settings</string>
 </resources>

@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.submissionone.model.FollowingUser
-import com.example.submissionone.retrofitAPI.ApiRetrofit
-import com.example.submissionone.retrofitAPI.RetrofitClient
+import com.example.submissionone.retrofitapi.ApiRetrofit
+import com.example.submissionone.retrofitapi.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

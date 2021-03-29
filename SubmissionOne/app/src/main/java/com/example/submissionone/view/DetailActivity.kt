@@ -1,6 +1,5 @@
 package com.example.submissionone.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.submissionone.R
+import com.example.submissionone.R.string.*
 import com.example.submissionone.adapter.SectionPagerAdapter
 import com.example.submissionone.databinding.ActivityDetailBinding
 import com.example.submissionone.viewmodel.UserViewModel
@@ -20,8 +19,8 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
 
         private val TAB_TITLES = intArrayOf(
-                R.string.mengikuti,
-                R.string.pengikut
+                mengikuti,
+                pengikut
         )
     }
 
@@ -71,7 +70,6 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar?.elevation = 0f
     }
 
-    @SuppressLint("SetTextI18n")
     private fun getDetailData() {
 
         val username = intent.getStringExtra(EXTRA_DATA)
@@ -93,13 +91,19 @@ class DetailActivity : AppCompatActivity() {
                             .load(it.avatarUser)
                             .apply(RequestOptions().override(100,100))
                             .into(ivAvatarAbout)
+                    val companyString:String = getString(company_string) + it.companyUser
+                    val locationString:String = getString(location_string) + it.locationUser
+                    val repositoryString:String = getString(repository_string) + it.repositoryUser
+                    val followersString:String = getString(followers_string) + it.followersUser
+                    val followingString:String = getString(following_string) + it.followingUser
+                    val nameString:String = getString(name_string) + it.nameUser
                     tvUsernameAbout.text = it.usernameUser
-                    tvNameAbout.text = "Name: ${it.nameUser}"
-                    tvCompanyAbout.text = "Company: ${it.companyUser}"
-                    tvLocationAbout.text = "Location: ${it.locationUser}"
-                    tvRepositoryAbout.text = "Repository:\n${it.repositoryUser}"
-                    tvFollowersAbout.text = "Followers:\n${it.followersUser}"
-                    tvFollowingAbout.text = "Following:\n${it.followingUser}"
+                    tvNameAbout.text = nameString
+                    tvCompanyAbout.text = companyString
+                    tvLocationAbout.text = locationString
+                    tvRepositoryAbout.text = repositoryString
+                    tvFollowersAbout.text = followersString
+                    tvFollowingAbout.text = followingString
 
                 }
             }

@@ -1,4 +1,4 @@
-package com.example.submissionone.retrofitAPI
+package com.example.submissionone.retrofitapi
 
 import com.example.submissionone.model.*
 import retrofit2.Call
