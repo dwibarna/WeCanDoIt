@@ -2,6 +2,7 @@ package com.example.submissionone.model
 
 import com.google.gson.annotations.SerializedName
 
+
 data class DetailUser(
         @SerializedName("login")
         var usernameUser:String="",
