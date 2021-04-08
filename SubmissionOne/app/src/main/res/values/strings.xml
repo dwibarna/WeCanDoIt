@@ -21,6 +21,7 @@
     <string name="following_string">Following: \n</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="settings">Settings</string>
+    <string name="favorite_user_list">Favorite User List</string>
 </resources>
 
 

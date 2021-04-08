@@ -28,16 +28,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userViewModel = ViewModelProvider(
-            this,ViewModelProvider.NewInstanceFactory()
-        ).get(UserViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         showRecyclerList()
         clickToDetail()
         getDataModel()
         searchUser()
         showList(userAdapter)
+        clickToFavorite()
 
+    }
+
+    private fun clickToFavorite() {
+        binding.btnToFavorite.setOnClickListener {
+            val intent = Intent(this,FavoriteActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,6 +64,8 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(data: User) {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_DATA,data.usernameUser)
+                intent.putExtra(DetailActivity.EXTRA_FAVORITE,data.id)
+                intent.putExtra(DetailActivity.EXTRA_AVATAR,data.avatarUser)
                 startActivity(intent)
             }
         })

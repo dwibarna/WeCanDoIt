@@ -3,6 +3,7 @@
     package="com.example.submissionone">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/main_logo"
@@ -10,6 +11,7 @@
         android:roundIcon="@drawable/main_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SubmissionOne">
+        <activity android:name=".view.FavoriteActivity"></activity>
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.SplashActivity">
             <intent-filter>

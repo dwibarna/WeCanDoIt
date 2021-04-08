@@ -1,22 +1,61 @@
 package com.example.submissionone.viewmodel
 
+import android.app.Application
 import android.content.Context
 import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.submissionone.database.FavoriteDao
+import com.example.submissionone.database.FavoriteDatabase
+import com.example.submissionone.database.FavoriteUser
 import com.example.submissionone.model.DataSearchUser
 import com.example.submissionone.model.DetailUser
 import com.example.submissionone.model.User
 import com.example.submissionone.retrofitapi.ApiRetrofit
 import com.example.submissionone.retrofitapi.RetrofitClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserViewModel: ViewModel() {
+
+class UserViewModel(application: Application): AndroidViewModel(application) {
     private val detailUserList = MutableLiveData<DetailUser>()
     private val listUser = MutableLiveData<ArrayList<User>>()
+
+
+
+    private var favorDb:FavoriteDatabase? = FavoriteDatabase.getDatabase(application)
+    private var favorDao:FavoriteDao? = favorDb?.favoriteDao()
+
+
+
+
+    fun addFavoriteUser(username: String,id: Int,avatar:String){
+        CoroutineScope(Dispatchers.IO).launch {
+            val favoriteUser = FavoriteUser(
+                id,
+                username,
+                avatar
+            )
+            favorDao?.insertData(favoriteUser)
+        }
+    }
+
+    suspend fun checkFavorite(id:Int) = favorDao?.checkMyFavorite(id)
+
+    fun deleteFavorite(id:Int){
+        CoroutineScope(Dispatchers.IO).launch {
+            favorDao?.deleteData(id)
+        }
+    }
+
+    fun getFavoriteUser():LiveData<List<FavoriteUser>>?{
+        return favorDao?.getDataFavorite()
+    }
 
     fun getListUser():LiveData<ArrayList<User>>{
         return listUser
@@ -36,7 +75,6 @@ class UserViewModel: ViewModel() {
                 Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
-
     }
 
      fun getDetailData(username:String, context: Context) {
