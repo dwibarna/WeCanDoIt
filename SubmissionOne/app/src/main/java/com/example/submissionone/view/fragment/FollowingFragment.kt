@@ -1,4 +1,4 @@
-package com.example.submissionone.view
+package com.example.submissionone.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.submissionone.adapter.FollowingAdapter
 import com.example.submissionone.databinding.FragmentFollowingBinding
 import com.example.submissionone.model.FollowingUser
+import com.example.submissionone.view.DetailActivity
 import com.example.submissionone.viewmodel.FollowingViewModel
 
 class FollowingFragment : Fragment() {
@@ -50,7 +51,7 @@ class FollowingFragment : Fragment() {
     }
 
     private fun getDataFollowing() {
-        val username = arguments?.getString(DetailActivity.EXTRA_DATA).toString()
+        val username = arguments?.getString(DetailActivity.EXTRA_USERNAME).toString()
         followingViewModel.getListDataFollowing(username, requireContext().applicationContext)
     }
 

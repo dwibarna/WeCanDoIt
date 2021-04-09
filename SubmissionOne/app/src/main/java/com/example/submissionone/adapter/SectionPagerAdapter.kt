@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.submissionone.view.FollowersFragment
-import com.example.submissionone.view.FollowingFragment
+import com.example.submissionone.view.fragment.FollowersFragment
+import com.example.submissionone.view.fragment.FollowingFragment
 
 class SectionPagerAdapter(activity: AppCompatActivity,bundle: Bundle):FragmentStateAdapter(activity) {
     private var mBundle:Bundle = bundle

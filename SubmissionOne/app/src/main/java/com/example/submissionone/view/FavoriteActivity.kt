@@ -30,15 +30,14 @@ class FavoriteActivity : AppCompatActivity() {
         showLoading(true)
         onClickDetail()
 
-
     }
 
     private fun onClickDetail() {
         favoriteAdapter.setOnItemClick(object : FavoriteAdapter.OnItemClickCallBack {
             override fun onItemClick(data: FavoriteUser) {
                 val intent = Intent(this@FavoriteActivity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_DATA,data.usernameUser)
-                intent.putExtra(DetailActivity.EXTRA_FAVORITE,data.id)
+                intent.putExtra(DetailActivity.EXTRA_USERNAME,data.usernameUser)
+                intent.putExtra(DetailActivity.EXTRA_ID,data.id)
                 intent.putExtra(DetailActivity.EXTRA_AVATAR,data.avatarUser)
                 startActivity(intent)
             }

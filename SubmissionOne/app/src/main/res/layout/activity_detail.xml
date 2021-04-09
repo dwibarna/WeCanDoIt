@@ -55,11 +55,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <de.hdodenhof.circleimageview.CircleImageView
+        tools:src="@drawable/user1"
         android:id="@+id/ivAvatarAbout"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginTop="116dp"
-        android:src="@drawable/user1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/sobarna11"
+        tools:text="@string/sobarna11"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -129,7 +129,7 @@
             android:layout_gravity="top"
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
-            android:text="@string/name_dwi_aji_sobarna"
+            tools:text="@string/name_dwi_aji_sobarna"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -139,7 +139,7 @@
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="85dp"
-            android:text="@string/location_serang_city"
+            tools:text="@string/location_serang_city"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -149,7 +149,7 @@
             android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            android:text="@string/company_sobarna_farm"
+            tools:text="@string/company_sobarna_farm"
             android:textColor="@color/black"
             android:textSize="14sp" />
 
@@ -185,6 +185,7 @@
         android:backgroundTint="#4A919A"
         android:src="@drawable/ic_baseline_favorite_border_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        android:contentDescription="@string/fab_transformation_scrim_behavior" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

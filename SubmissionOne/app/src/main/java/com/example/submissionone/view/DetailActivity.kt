@@ -1,13 +1,13 @@
 package com.example.submissionone.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.submissionone.BuildConfig
 import com.example.submissionone.R
 import com.example.submissionone.R.string.*
 import com.example.submissionone.adapter.SectionPagerAdapter
@@ -22,31 +22,65 @@ import kotlinx.coroutines.withContext
 
 class DetailActivity : AppCompatActivity() {
     companion object {
-        const val EXTRA_DATA = "extra_data"
-        const val EXTRA_FAVORITE = "extra_favorite"
+        const val EXTRA_USERNAME = "extra_data"
+        const val EXTRA_ID = "extra_favorite"
         const val EXTRA_AVATAR = "extra_avatar"
-
         private val TAB_TITLES = intArrayOf(
             mengikuti,
             pengikut
         )
     }
-
     private lateinit var userViewModel: UserViewModel
     private lateinit var binding: ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         userViewModel = ViewModelProvider(
             this
         ).get(UserViewModel::class.java)
-
-
         getDetailData()
-        sectionAdapterFunction()
 
+
+        sectionAdapterFunction()
+        addAndDeleteFavorite()
+        BuildConfig.APPLICATION_ID
+    }
+
+    private fun addAndDeleteFavorite() {
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        val id = intent.getIntExtra(EXTRA_ID, 0)
+        val avatar = intent.getStringExtra(EXTRA_AVATAR)
+        var statusFav = false
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val number = userViewModel.checkFavorite(id)
+            withContext(Dispatchers.Main) {
+                if (number != null) {
+                    if (number >0) {
+                        statusFav = true
+                        favoriteCheck(statusFav)
+                    } else {
+                        statusFav = false
+                        favoriteCheck(statusFav)
+                    }
+                }
+            }
+            binding.fabFavoriteButton.setOnClickListener {
+                statusFav = !statusFav
+                if (statusFav) {
+                    if (username != null) {
+                        if (avatar != null) {
+                            userViewModel.addFavoriteUser(username, id,avatar)
+                        }
+                    }
+                    favoriteCheck(statusFav)
+                } else {
+                    userViewModel.deleteFavorite(id)
+                    favoriteCheck(statusFav)
+                }
+            }
+        }
     }
 
 
@@ -70,40 +104,29 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun sectionAdapterFunction() {
-
-
-        val username = intent.getStringExtra(EXTRA_DATA)
+        val username = intent.getStringExtra(EXTRA_USERNAME)
         val bundle = Bundle()
-        bundle.putString(EXTRA_DATA, username)
-
+        bundle.putString(EXTRA_USERNAME, username)
         val sectionPagerAdapter = SectionPagerAdapter(this, bundle)
         val viewPager: ViewPager2 = binding.viewPagerDetail
         viewPager.adapter = sectionPagerAdapter
         val tabs: TabLayout = binding.tlDetail
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
-
         }.attach()
-
         supportActionBar?.elevation = 0f
     }
 
     private fun getDetailData() {
-
-        val username = intent.getStringExtra(EXTRA_DATA)
-        val id = intent.getIntExtra(EXTRA_FAVORITE, 0)
-        val avatar = intent.getStringExtra(EXTRA_AVATAR)
+        val username = intent.getStringExtra(EXTRA_USERNAME)
         val bundle = Bundle()
-        bundle.putString(EXTRA_DATA, username)
-
-
+        bundle.putString(EXTRA_USERNAME, username)
         if (username != null) {
             userViewModel.getDetailData(username, this@DetailActivity)
             showLoading(false)
         } else {
             showLoading(true)
         }
-
         userViewModel.getUserDetail().observe(this, {
             if (it != null) {
                 binding.apply {
@@ -127,43 +150,6 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         })
-
-        var statusFav = false
-        CoroutineScope(Dispatchers.IO).launch {
-            val number = userViewModel.checkFavorite(id)
-            withContext(Dispatchers.Main) {
-                if (number != null) {
-                    if (number >0) {
-                            statusFav = true
-                            favoriteCheck(statusFav)
-                        } else {
-                            statusFav = false
-                            favoriteCheck(statusFav)
-                    }
-                }
-            }
-
-
-            binding.fabFavoriteButton.setOnClickListener {
-                statusFav = !statusFav
-                if (statusFav) {
-                    if (username != null) {
-                        if (avatar != null) {
-                            userViewModel.addFavoriteUser(username, id,avatar)
-                        }
-                    }
-                    favoriteCheck(statusFav)
-
-
-                } else {
-                    userViewModel.deleteFavorite(id)
-                    favoriteCheck(statusFav)
-                }
-                Log.d(statusFav.toString(), "I want to Check")
-            }
-
-        }
-
     }
 }
 

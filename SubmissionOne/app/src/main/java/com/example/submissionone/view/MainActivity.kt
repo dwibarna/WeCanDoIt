@@ -2,7 +2,6 @@ package com.example.submissionone.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_settings){
-            val menuIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            val menuIntent = Intent(this,SettingActivity::class.java)
             startActivity(menuIntent)
         }
         return super.onOptionsItemSelected(item)
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         userAdapter.setOnItemClick(object : UserAdapter.OnItemClickCallBack {
             override fun onItemClick(data: User) {
                 val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_DATA,data.usernameUser)
-                intent.putExtra(DetailActivity.EXTRA_FAVORITE,data.id)
+                intent.putExtra(DetailActivity.EXTRA_USERNAME,data.usernameUser)
+                intent.putExtra(DetailActivity.EXTRA_ID,data.id)
                 intent.putExtra(DetailActivity.EXTRA_AVATAR,data.avatarUser)
                 startActivity(intent)
             }
