@@ -4,7 +4,6 @@
     app:iconSpaceReserved="false">
 
     <SwitchPreference
-        android:id="@+id/switchReminderPreferences"
         android:defaultValue="false"
         android:key="switch"
         android:textSize="16sp"

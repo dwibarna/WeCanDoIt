@@ -28,7 +28,6 @@ class FollowersAdapter(private var followersList :ArrayList<FollowersUser>)
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowersViewHolder {
         val binding = GithubListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return FollowersViewHolder(binding)

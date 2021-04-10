@@ -1,26 +1,21 @@
-package com.example.submissionone.adapter
+package com.example.consumersubmissionapp
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.submissionone.database.FavoriteUser
-import com.example.submissionone.databinding.GithubListBinding
+import com.example.consumersubmissionapp.databinding.GithubListBinding
 
 class FavoriteAdapter(private var favoriteList :ArrayList<FavoriteUser>)
     : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    private lateinit var onItemClickCallBack: OnItemClickCallBack
-
-    fun setOnItemClick(onItemClickCallBack: OnItemClickCallBack){
-        this.onItemClickCallBack = onItemClickCallBack
-    }
     fun setDataFavorite(itemList: List<FavoriteUser>){
         favoriteList.clear()
         favoriteList.addAll(itemList)
         notifyDataSetChanged()
     }
+
     inner class FavoriteViewHolder(private val binding: GithubListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(favorite: FavoriteUser){
             with(binding){
@@ -30,7 +25,6 @@ class FavoriteAdapter(private var favoriteList :ArrayList<FavoriteUser>)
                     .into(ivAvatarList)
                 tvUsernameList.text = favorite.usernameUser
                 binding.root.setOnClickListener {
-                    onItemClickCallBack.onItemClick(favorite)
                 }
             }
         }
@@ -46,7 +40,5 @@ class FavoriteAdapter(private var favoriteList :ArrayList<FavoriteUser>)
     }
 
     override fun getItemCount(): Int = favoriteList.size
-    interface OnItemClickCallBack{
-        fun onItemClick(data: FavoriteUser)
-    }
+
 }

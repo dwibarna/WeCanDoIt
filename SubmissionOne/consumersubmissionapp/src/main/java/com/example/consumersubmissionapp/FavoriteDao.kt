@@ -1,6 +1,5 @@
-package com.example.submissionone.database
+package com.example.consumersubmissionapp
 
-import android.database.Cursor
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
@@ -13,9 +12,6 @@ interface FavoriteDao {
 
     @Query("SELECT * FROM favorite_table")
     fun getDataFavorite():LiveData<List<FavoriteUser>>
-
-    @Query("SELECT * FROM favorite_table")
-    fun favoriteAll(): Cursor
 
     @Query("DELETE FROM favorite_table WHERE favorite_table.id=:id")
     suspend fun deleteData(id: Int):Int
