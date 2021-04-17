@@ -15,17 +15,14 @@ class FavoriteAdapter(private var favoriteList :ArrayList<FavoriteUser>)
         favoriteList.addAll(itemList)
         notifyDataSetChanged()
     }
-
     inner class FavoriteViewHolder(private val binding: GithubListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(favorite: FavoriteUser){
-            with(binding){
-                Glide.with(itemView.context)
-                    .load(favorite.avatarUser)
-                    .apply(RequestOptions().override(100,100))
-                    .into(ivAvatarList)
-                tvUsernameList.text = favorite.usernameUser
-                binding.root.setOnClickListener {
-                }
+            Glide.with(itemView.context)
+                .load(favorite.avatarUser)
+                .apply(RequestOptions().override(100,100))
+                .into(binding.ivAvatarList)
+            binding.tvUsernameList.text = favorite.usernameUser
+            binding.root.setOnClickListener {
             }
         }
     }
@@ -38,7 +35,5 @@ class FavoriteAdapter(private var favoriteList :ArrayList<FavoriteUser>)
         holder.bind(favoriteList[position])
         favoriteList[position]
     }
-
     override fun getItemCount(): Int = favoriteList.size
-
 }

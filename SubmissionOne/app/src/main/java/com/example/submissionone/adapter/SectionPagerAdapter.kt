@@ -21,5 +21,4 @@ class SectionPagerAdapter(activity: AppCompatActivity,bundle: Bundle):FragmentSt
         fragment?.arguments = this.mBundle
         return fragment as Fragment
     }
-
 }

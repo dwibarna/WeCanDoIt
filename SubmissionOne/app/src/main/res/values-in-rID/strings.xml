@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="splash">Splash</string>
-    <string name="dicoding_submission2">DICODING SUBMISSION 2</string>
+    <string name="dicoding_submission2">DICODING SUBMISSION TERAKHIR</string>
     <string name="github_user">GITHUB USER</string>
     <string name="app_name">Submission One</string>
     <string name="dicoding_submission">SUBMISSION DICODING</string>

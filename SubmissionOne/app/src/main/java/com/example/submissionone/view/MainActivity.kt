@@ -29,27 +29,26 @@ class MainActivity : AppCompatActivity() {
 
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
+
+        showLoading(true)
         showRecyclerList()
         clickToDetail()
         getDataModel()
-        searchUser()
         showList(userAdapter)
+        searchUser()
+
         clickToFavorite()
-
     }
-
     private fun clickToFavorite() {
         binding.btnToFavorite.setOnClickListener {
             val intent = Intent(this,FavoriteActivity::class.java)
             startActivity(intent)
         }
     }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu,menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId == R.id.menu_settings){
             val menuIntent = Intent(this,SettingActivity::class.java)
@@ -57,7 +56,6 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
     private fun clickToDetail() {
         userAdapter.setOnItemClick(object : UserAdapter.OnItemClickCallBack {
             override fun onItemClick(data: User) {
@@ -69,37 +67,40 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun searchUser() {
         binding.svUser.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
+
                 if (query!=null){
-                    list.clear()
+
                     binding.svUser.clearFocus()
                     userViewModel.searchUserAPI(query,applicationContext)
-                    showLoading(true)
                     showList(userAdapter)
+                    showLoading(true)
+                    list.clear()
+                    UserAdapter(list)
+
+
                 }
-                return false
+
+                return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                return true
+                return false
             }
         })
     }
-
     private fun getDataModel() {
-        userViewModel.getData(applicationContext)
         showLoading(true)
+        userViewModel.getData(applicationContext)
     }
-
     private fun showRecyclerList() {
+        showLoading(true)
         binding.rvUserList.layoutManager = LinearLayoutManager(this)
         userAdapter = UserAdapter(list)
         userAdapter.notifyDataSetChanged()
         binding.rvUserList.adapter = userAdapter
     }
-
     private fun showLoading(state:Boolean){
         if(state){
             binding.pbListUser.visibility = View.VISIBLE
@@ -107,14 +108,12 @@ class MainActivity : AppCompatActivity() {
             binding.pbListUser.visibility = View.GONE
         }
     }
-
     private fun showList(adapter: UserAdapter) {
         userViewModel.getListUser().observe(this, { userList ->
             if (userList != null){
-                adapter.setData(userList)
                 showLoading(false)
+                adapter.setData(userList)
             }
         })
     }
-
 }

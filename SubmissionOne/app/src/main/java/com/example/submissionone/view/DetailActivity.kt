@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.submissionone.BuildConfig
 import com.example.submissionone.R
 import com.example.submissionone.R.string.*
 import com.example.submissionone.adapter.SectionPagerAdapter
@@ -39,12 +38,10 @@ class DetailActivity : AppCompatActivity() {
         userViewModel = ViewModelProvider(
             this
         ).get(UserViewModel::class.java)
+
         getDetailData()
-
-
         sectionAdapterFunction()
         addAndDeleteFavorite()
-        BuildConfig.APPLICATION_ID
     }
 
     private fun addAndDeleteFavorite() {
@@ -82,8 +79,6 @@ class DetailActivity : AppCompatActivity() {
             }
         }
     }
-
-
     private fun favoriteCheck(state: Boolean) {
         if (state) {
             binding.fabFavoriteButton.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -93,8 +88,6 @@ class DetailActivity : AppCompatActivity() {
 
         }
     }
-
-
     private fun showLoading(state: Boolean) {
         if (state) {
             binding.pbDetailUser.visibility = View.VISIBLE
@@ -102,7 +95,6 @@ class DetailActivity : AppCompatActivity() {
             binding.pbDetailUser.visibility = View.GONE
         }
     }
-
     private fun sectionAdapterFunction() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
         val bundle = Bundle()
@@ -116,7 +108,6 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
         supportActionBar?.elevation = 0f
     }
-
     private fun getDetailData() {
         val username = intent.getStringExtra(EXTRA_USERNAME)
         val bundle = Bundle()

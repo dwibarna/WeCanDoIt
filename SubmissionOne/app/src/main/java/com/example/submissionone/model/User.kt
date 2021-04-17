@@ -5,9 +5,10 @@ import com.google.gson.annotations.SerializedName
 
 data class User(
         @SerializedName("login")
-        var usernameUser:String,
+        var usernameUser:String ="",
         @SerializedName("avatar_url")
-        var avatarUser:String,
-        var id:Int
+        var avatarUser:String="",
+        var id: Int? = null
+
 )
 

@@ -29,9 +29,7 @@ class FavoriteActivity : AppCompatActivity() {
         showFavoriteList(favoriteAdapter)
         showLoading(true)
         onClickDetail()
-
     }
-
     private fun onClickDetail() {
         favoriteAdapter.setOnItemClick(object : FavoriteAdapter.OnItemClickCallBack {
             override fun onItemClick(data: FavoriteUser) {
@@ -43,7 +41,6 @@ class FavoriteActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun showFavoriteList(adapter: FavoriteAdapter) {
         userViewModel.getFavoriteUser()?.observe(this, { userList ->
             if (userList != null){
@@ -52,7 +49,6 @@ class FavoriteActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun showLoading(state:Boolean){
         if(state){
             binding.pbFavoriteUser.visibility = View.VISIBLE
@@ -60,8 +56,6 @@ class FavoriteActivity : AppCompatActivity() {
             binding.pbFavoriteUser.visibility = View.GONE
         }
     }
-
-
     private fun showRecycleFavoriteList() {
         binding.rvFavoriteList.layoutManager = LinearLayoutManager(this)
         favoriteAdapter = FavoriteAdapter(list)

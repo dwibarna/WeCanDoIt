@@ -17,13 +17,10 @@ class UserAdapter(private var listUser:ArrayList<User>) :
         listUser.clear()
         listUser.addAll(itemList)
         notifyDataSetChanged()
-
     }
-
     fun setOnItemClick(onItemClickCallBack: OnItemClickCallBack){
         this.onItemClickCallBack = onItemClickCallBack
     }
-
     inner class UserViewHolder(private val binding: GithubListBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: User){
             with(binding){
@@ -32,28 +29,23 @@ class UserAdapter(private var listUser:ArrayList<User>) :
                     .apply(RequestOptions().override(100,100))
                     .into(ivAvatarList)
                 tvUsernameList.text = user.usernameUser
-                binding.root.setOnClickListener {
+                root.setOnClickListener {
                     onItemClickCallBack.onItemClick(user)
                 }
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val binding = GithubListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return UserViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(listUser[position])
         listUser[position]
-
     }
-
     override fun getItemCount(): Int = listUser.size
 
     interface OnItemClickCallBack{
         fun onItemClick(data: User)
     }
-
 }

@@ -5,19 +5,19 @@ import com.google.gson.annotations.SerializedName
 
 data class DetailUser(
         @SerializedName("login")
-        var usernameUser:String,
+        var usernameUser:String ="",
         @SerializedName("avatar_url")
-        var avatarUser:String,
+        var avatarUser:String="",
         @SerializedName("location")
-        var locationUser:String,
+        var locationUser:String="",
         @SerializedName("company")
-        var companyUser:String,
+        var companyUser:String="",
         @SerializedName("public_repos")
-        var repositoryUser:String,
+        var repositoryUser:String="",
         @SerializedName("followers")
-        var followersUser:String,
+        var followersUser:String="",
         @SerializedName("following")
-        var followingUser:String,
+        var followingUser:String="",
         @SerializedName("name")
-        var nameUser:String
+        var nameUser:String=""
 )

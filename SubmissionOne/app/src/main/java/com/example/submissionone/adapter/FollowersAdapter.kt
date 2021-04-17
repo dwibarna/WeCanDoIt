@@ -32,11 +32,9 @@ class FollowersAdapter(private var followersList :ArrayList<FollowersUser>)
         val binding = GithubListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return FollowersViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: FollowersViewHolder, position: Int) {
         holder.bind(followersList[position])
         followersList[position]
     }
-
     override fun getItemCount(): Int = followersList.size
 }

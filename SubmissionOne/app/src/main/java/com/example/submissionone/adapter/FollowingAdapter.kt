@@ -16,7 +16,6 @@ class FollowingAdapter(private var followingList :ArrayList<FollowingUser>)
         followingList.addAll(itemList)
         notifyDataSetChanged()
     }
-
     inner class FollowingViewHolder(private val binding: GithubListBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(following:FollowingUser){
             with(binding){
@@ -28,16 +27,13 @@ class FollowingAdapter(private var followingList :ArrayList<FollowingUser>)
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingViewHolder {
         val binding = GithubListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return FollowingViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: FollowingViewHolder, position: Int) {
         holder.bind(followingList[position])
         followingList[position]
     }
-
     override fun getItemCount(): Int = followingList.size
 }

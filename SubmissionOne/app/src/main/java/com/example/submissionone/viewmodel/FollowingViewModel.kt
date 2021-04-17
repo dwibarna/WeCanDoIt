@@ -21,13 +21,11 @@ class FollowingViewModel:ViewModel() {
                 override fun onResponse(call: Call<ArrayList<FollowingUser>>, response: Response<ArrayList<FollowingUser>>) {
                     listFollowing.postValue(response.body())
                 }
-
                 override fun onFailure(call: Call<ArrayList<FollowingUser>>, t: Throwable) {
                     Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
         }
-
         fun getListFollowing(): LiveData<ArrayList<FollowingUser>> {
             return listFollowing
         }

@@ -17,13 +17,8 @@ class SettingActivity : AppCompatActivity() {
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().add(R.id.constrainsSettings, MyPreferenceFragment()).commit()
-
         clickToChangeLanguage()
-
-
     }
-
-
     private fun clickToChangeLanguage() {
         binding.btnChangeLanguage.setOnClickListener {
             val menuIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)

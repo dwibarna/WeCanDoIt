@@ -11,28 +11,26 @@ import com.example.submissionone.database.FavoriteDatabase
 class MyContentProvider : ContentProvider() {
 
     companion object{
-        const val AUTHORITY = "com.example.submissionone"
         const val TABLE_NAME = "favorite_table"
+        const val AUTHORITY = "com.example.submissionone"
         const val ID_FAVORITE = 1
         val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
-
         init {
             uriMatcher.addURI(AUTHORITY, TABLE_NAME, ID_FAVORITE)
         }
     }
-
     private lateinit var favorDao:FavoriteDao
-
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         return 0
     }
 
     override fun getType(uri: Uri): String? {
-return null    }
+        return null
+    }
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-return null
+        return null
     }
 
     override fun onCreate(): Boolean {
@@ -60,11 +58,10 @@ return null
         }
         return cursor
     }
-
     override fun update(
         uri: Uri, values: ContentValues?, selection: String?,
         selectionArgs: Array<String>?
     ): Int {
-return 0
+        return 0
     }
 }

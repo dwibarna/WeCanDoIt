@@ -26,13 +26,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private val detailUserList = MutableLiveData<DetailUser>()
     private val listUser = MutableLiveData<ArrayList<User>>()
 
-
-
     private var favorDb:FavoriteDatabase? = FavoriteDatabase.getDatabase(application)
     private var favorDao:FavoriteDao? = favorDb?.favoriteDao()
-
-
-
 
     fun addFavoriteUser(username: String,id: Int,avatar:String){
         CoroutineScope(Dispatchers.IO).launch {
@@ -44,9 +39,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             favorDao?.insertData(favoriteUser)
         }
     }
-
-    suspend fun checkFavorite(id:Int) = favorDao?.checkMyFavorite(id)
-
+    suspend fun checkFavorite(id:Int): Int? {
+       return favorDao?.checkMyFavorite(id)
+    }
     fun deleteFavorite(id:Int){
         CoroutineScope(Dispatchers.IO).launch {
             favorDao?.deleteData(id)
@@ -60,11 +55,9 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun getListUser():LiveData<ArrayList<User>>{
         return listUser
     }
-
     fun getUserDetail():LiveData<DetailUser>{
         return detailUserList
     }
-
     fun getData(context: Context){
         val retroInstance = RetrofitClient.getRetroInstance().create(ApiRetrofit::class.java)
         retroInstance.getPosts().enqueue(object: Callback<ArrayList<User>> {
@@ -76,7 +69,6 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             }
         })
     }
-
      fun getDetailData(username:String, context: Context) {
          val retroInstanceDetail = RetrofitClient.getRetroInstance().create(ApiRetrofit::class.java)
          retroInstanceDetail.getDetail(username).enqueue(object: Callback<DetailUser> {
@@ -85,13 +77,11 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
                      detailUserList.postValue(response.body())
                  }
              }
-
              override fun onFailure(call: Call<DetailUser>, t: Throwable) {
                  Toast.makeText(context, "${t.message}", Toast.LENGTH_SHORT).show()
              }
          })
      }
-
     fun searchUserAPI(query:String,context: Context){
         val retroInstance = RetrofitClient.getRetroInstance().create(ApiRetrofit::class.java)
         retroInstance.getSearchAPI(query).enqueue(object : Callback<DataSearchUser>{

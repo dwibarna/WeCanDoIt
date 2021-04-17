@@ -25,13 +25,11 @@ class MainActivity : AppCompatActivity() {
         showRecycleFavoriteList()
         showFavoriteList(favoriteAdapter)
         showLoading(true)
-
-        newFunction()
+        getConsumer()
     }
 
-    private fun newFunction() {
+    private fun getConsumer() {
         userViewModel.getConsumer(this)
-
     }
 
     private fun showFavoriteList(adapter: FavoriteAdapter) {

@@ -10,7 +10,7 @@ object MappingHelper {
                 val id = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.ConsumerFavoriteColumns.ID))
                 val username = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ConsumerFavoriteColumns.USERNAME))
                 val avatar = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.ConsumerFavoriteColumns.AVATAR))
-
+                
                 list.add(FavoriteUser(id,username,avatar))
             }
         }

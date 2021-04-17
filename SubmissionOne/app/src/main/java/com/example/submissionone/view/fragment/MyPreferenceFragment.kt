@@ -23,28 +23,21 @@ class MyPreferenceFragment:PreferenceFragmentCompat(),
         private const val ALARM_MESSAGE = "alarm_message"
         private const val ID_REPEATING = 101
     }
-
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences)
         init()
         reminderReceiver = ReminderReceiver()
-
     }
-
     private fun init() {
         switchPreference = findPreference<SwitchPreference>("switch") as SwitchPreference
 
         val sh = preferenceManager.sharedPreferences
         switchPreference.isChecked =  sh.getBoolean("switch",conditionSwitch)
-
     }
     private fun conditionSwitch() {
         if (switchPreference.isChecked){
-
             alarmSet()
         }else{
-
             cancelAlarm()
         }
     }
@@ -60,14 +53,12 @@ class MyPreferenceFragment:PreferenceFragmentCompat(),
             set(Calendar.MINUTE,59)
             set(Calendar.SECOND,59)
         }
-
         alarmManager.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
             timeAtMorning.timeInMillis,
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
-
     }
     private fun cancelAlarm(){
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
@@ -77,26 +68,20 @@ class MyPreferenceFragment:PreferenceFragmentCompat(),
         }
         alarmManager.cancel(pendingIntent)
     }
-
     override fun onResume() {
         super.onResume()
         preferenceScreen.sharedPreferences.registerOnSharedPreferenceChangeListener(this)
         conditionSwitch()
     }
-
     override fun onPause() {
         super.onPause()
         preferenceScreen.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this)
         conditionSwitch()
-
     }
-
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences, key: String) {
         if(key == "switch"){
             switchPreference.isChecked = sharedPreferences.getBoolean("switch",conditionSwitch)
             conditionSwitch()
-
         }
     }
-
 }

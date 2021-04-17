@@ -29,19 +29,16 @@ class FollowingFragment : Fragment() {
         _binding = FragmentFollowingBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         followingViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             FollowingViewModel::class.java
         )
-
         showLoading(true)
         showFollowingRecycleList()
         getDataFollowing()
         showFollowingList(followingAdapter)
     }
-
     private fun showLoading(state: Boolean) {
         if (state) {
             binding.pbFollowingUser.visibility = View.VISIBLE
@@ -49,12 +46,10 @@ class FollowingFragment : Fragment() {
             binding.pbFollowingUser.visibility = View.GONE
         }
     }
-
     private fun getDataFollowing() {
         val username = arguments?.getString(DetailActivity.EXTRA_USERNAME).toString()
         followingViewModel.getListDataFollowing(username, requireContext().applicationContext)
     }
-
     private fun showFollowingList(adapter: FollowingAdapter) {
         followingViewModel.getListFollowing().observe(viewLifecycleOwner, { followingList ->
             if (followingList != null) {
@@ -63,7 +58,6 @@ class FollowingFragment : Fragment() {
             }
         })
     }
-
     private fun showFollowingRecycleList() {
         binding.rvFollowingList.layoutManager = LinearLayoutManager(activity)
         followingAdapter = FollowingAdapter(list)

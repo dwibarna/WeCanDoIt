@@ -26,20 +26,16 @@ class FollowersFragment : Fragment() {
         _binding = FragmentFollowersBinding.inflate(inflater,container,false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         followersViewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(
                 FollowersViewModel::class.java
         )
-
         showLoading(true)
         showFollowersRecycleList()
         getDataFollowers()
         showFollowersList(followersAdapter)
     }
-
-
     private fun showLoading(state:Boolean){
         if(state){
             binding.pbFollowersUser.visibility = View.VISIBLE
@@ -47,12 +43,10 @@ class FollowersFragment : Fragment() {
             binding.pbFollowersUser.visibility = View.GONE
         }
     }
-
     private fun getDataFollowers() {
         val username = arguments?.getString(DetailActivity.EXTRA_USERNAME).toString()
         followersViewModel.getListDataFollowers(username,requireContext().applicationContext)
     }
-
     private fun showFollowersList(adapter: FollowersAdapter) {
         followersViewModel.getListFollowers().observe(viewLifecycleOwner,{ followersList ->
             if(followersList != null){
@@ -61,7 +55,6 @@ class FollowersFragment : Fragment() {
             }
         })
     }
-
     private fun showFollowersRecycleList() {
         binding.rvFollowersList.layoutManager = LinearLayoutManager(activity)
         followersAdapter = FollowersAdapter(list)

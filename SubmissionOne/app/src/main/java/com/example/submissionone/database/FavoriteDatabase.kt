@@ -7,18 +7,13 @@ import androidx.room.RoomDatabase
 
 
 
-@Database(
-    entities = [FavoriteUser::class],
-    version = 1
-)
+@Database(entities = [FavoriteUser::class], version = 1)
 abstract class FavoriteDatabase:RoomDatabase() {
 
     abstract fun favoriteDao():FavoriteDao
 
     companion object{
-
         private var INSTANCE:FavoriteDatabase? = null
-
         fun getDatabase(context: Context): FavoriteDatabase? {
             if(INSTANCE == null ){
                 synchronized(FavoriteDatabase::class){
@@ -31,8 +26,5 @@ abstract class FavoriteDatabase:RoomDatabase() {
             }
             return INSTANCE
         }
-
     }
-
-
 }

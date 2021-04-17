@@ -18,6 +18,8 @@ class ReminderReceiver : BroadcastReceiver() {
         private const val ALARM_TITLE = "alarm_title"
         private const val ALARM_MESSAGE = "alarm_message"
         private const val ID_REPEATING = 101
+        const val CHANNEL_ID = "Channel_1"
+        const val CHANNEL_NAME = "AlarmManager channel"
     }
     override fun onReceive(context: Context, intent: Intent) {
         val message = intent.getStringExtra(ALARM_MESSAGE)
@@ -27,19 +29,16 @@ class ReminderReceiver : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getActivity(context,0,notifIntent,0)
         val title = intent.getStringExtra(ALARM_TITLE)
         val notifId =ID_REPEATING
-        context.let{
-            showAlarmNotification(
-                context,
-                title?: "Tittle",
-                message ?: "Message",
-                notifId,
-                pendingIntent
-            )
-        }
+        showAlarmNotification(
+            context,
+            title?: "Tittle",
+            message ?: "Message",
+            notifId,
+            pendingIntent
+        )
     }
     private fun showAlarmNotification(context: Context, title: String, message: String, notifId: Int,intent:PendingIntent) {
-        val CHANNEL_ID = "Channel_1"
-        val CHANNEL_NAME = "AlarmManager channel"
+
         val notificationManagerCompat = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
@@ -50,7 +49,6 @@ class ReminderReceiver : BroadcastReceiver() {
             .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
             .setSound(alarmSound)
             .setContentIntent(intent)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(CHANNEL_ID,
                 CHANNEL_NAME,
