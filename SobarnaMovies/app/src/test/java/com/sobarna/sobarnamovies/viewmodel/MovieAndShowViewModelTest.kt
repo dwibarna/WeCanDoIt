@@ -3,13 +3,18 @@ package com.sobarna.sobarnamovies.viewmodel
 import junit.framework.TestCase.assertEquals
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mock
 
 class MovieAndShowViewModelTest {
 
     private lateinit var movieAndShowViewModel: MovieAndShowViewModel
+
+    @Mock
+    private lateinit var repository: MovieRepository
+
     @Before
     fun before(){
-        movieAndShowViewModel = MovieAndShowViewModel()
+        movieAndShowViewModel = MovieAndShowViewModel(repository)
     }
     @Test
     fun getListShow() {

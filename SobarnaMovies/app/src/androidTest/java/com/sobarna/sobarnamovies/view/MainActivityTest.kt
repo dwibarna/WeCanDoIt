@@ -9,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.sobarna.sobarnamovies.R
 import com.sobarna.sobarnamovies.viewmodel.MovieAndShowViewModel
+import com.sobarna.sobarnamovies.viewmodel.MovieRepository
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,6 +18,8 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class MainActivityTest{
 
+    private lateinit var repository: MovieRepository
+
     @get:Rule
     var activityRule = ActivityScenarioRule(MainActivity::class.java)
 
@@ -24,7 +27,7 @@ class MainActivityTest{
     fun checkRecyclerMovie(){
 
         onView(withId(R.id.rvMovieList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel().getListMovie().size))
+        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel(repository).getListMovie().size))
     }
     @Test
     fun checkDetailMovieFirst(){
@@ -44,7 +47,7 @@ class MainActivityTest{
     @Test
     fun checkDetailMovieLast(){
 
-        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel().getListMovie().lastIndex,click()))
+        onView(withId(R.id.rvMovieList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel(repository).getListMovie().lastIndex,click()))
 
         onView(withId(R.id.ivAvatarDetail)).check(matches(isDisplayed()))
         onView(withId(R.id.tvDirectorDetail)).check(matches(isDisplayed()))
@@ -60,7 +63,7 @@ class MainActivityTest{
     fun checkRecyclerShow(){
         onView(withId(R.id.rvMovieList)).perform(swipeLeft())
         onView(withId(R.id.rvTvShowList)).check(matches(isDisplayed()))
-        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel().getListMovie().size))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel(repository).getListMovie().size))
     }
 
     @Test
@@ -83,7 +86,7 @@ class MainActivityTest{
     fun checkDetailTvShowLast(){
         onView(withText("TV Show")).perform(click())
 
-        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel().getListShow().lastIndex,click()))
+        onView(withId(R.id.rvTvShowList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(MovieAndShowViewModel(repository).getListShow().lastIndex,click()))
 
         onView(withId(R.id.ivAvatarDetail)).check(matches(isDisplayed()))
         onView(withId(R.id.tvDirectorDetail)).check(matches(isDisplayed()))

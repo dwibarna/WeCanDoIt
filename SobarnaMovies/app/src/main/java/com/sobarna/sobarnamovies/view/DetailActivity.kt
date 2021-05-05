@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.sobarna.sobarnamovies.databinding.ActivityDetailBinding
+import com.sobarna.sobarnamovies.model.Result
 import com.sobarna.sobarnamovies.model.SobanaMovies
 import com.sobarna.sobarnamovies.model.SobanaShow
 
@@ -28,22 +29,25 @@ class DetailActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     private fun getData() {
-        val getData = intent.getParcelableExtra<SobanaMovies>(EXTRA_DATA)
+        val getData = intent.getParcelableExtra<Result>(EXTRA_DATA)
         val dataShow = intent.getParcelableExtra<SobanaShow>(EXTRA_SHOW)
         val magicWidth = 300
         val magicHeight = 250
 
-        if (getData?.avatarMovie != null){
+
+        if (getData?.poster_path != null){
+            val imageUrl :String= "https://image.tmdb.org/t/p/w500${getData.poster_path}"
             Glide.with(this)
-                    .load(getData.avatarMovie)
+                    .load(imageUrl)
                     .apply(RequestOptions().override(magicWidth,magicHeight))
                     .into(binding.ivAvatarDetail)
 
-            binding.tvTitleDetail.text = getData.movieTitle
-            binding.tvReleaseDateDetail.text = getData.releaseDateMovie
-            binding.tvGenreDetail.text = getData.genreMovie
-            binding.tvOverviewDetail.text = getData.overviewMovie
-            binding.tvDirectorDetail.text = getData.directorMovie
+
+            binding.tvTitleDetail.text = getData.title
+            binding.tvReleaseDateDetail.text = getData.release_date
+            binding.tvGenreDetail.text = "cek"
+            binding.tvOverviewDetail.text = getData.overview
+            binding.tvDirectorDetail.text = getData.popularity.toString()
         }else{
             Glide.with(this)
                     .load(dataShow?.avatarShow)
