@@ -2,6 +2,8 @@ package com.sobarna.sobarnamovies.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -23,9 +25,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sectionAdapter()
+
+        setBottomNav()
+
+            //sectionAdapter()
     }
 
+    private fun setBottomNav() {
+        val navController = findNavController(R.id.navHostFragment)
+        binding.navBottom.setupWithNavController(navController)
+
+    }
+/*
     private fun sectionAdapter() {
         val sectionPagerAdapter = SectionPagerAdapter(this)
         val viewPager:ViewPager2 = binding.vpMovieList
@@ -36,4 +47,6 @@ class MainActivity : AppCompatActivity() {
         }.attach()
         supportActionBar?.elevation = 0f
     }
+
+ */
 }

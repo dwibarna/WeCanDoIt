@@ -1,7 +1,6 @@
 package com.sobarna.sobarnamovies.view.fragment
 
 import android.content.Context
-import android.graphics.Movie
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
