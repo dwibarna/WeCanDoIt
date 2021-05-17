@@ -12,6 +12,15 @@
         android:src="@drawable/cinema"
         android:contentDescription="@string/sobarna_movies" />
 
+
+    <ProgressBar
+        android:id="@+id/pbShowList"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

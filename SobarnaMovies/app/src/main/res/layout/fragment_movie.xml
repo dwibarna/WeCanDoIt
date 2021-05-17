@@ -12,6 +12,16 @@
         android:src="@drawable/cinema"
         android:contentDescription="@string/sobarna_movies" />
 
+
+
+    <ProgressBar
+        android:id="@+id/pbMovieList"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_gravity="center"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,12 +33,12 @@
         android:fontFamily="@font/autour_one"/>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMovieList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            tools:listitem="@layout/movie_list"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMovieList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        tools:listitem="@layout/movie_list"
             />
 
 </FrameLayout>

@@ -3,9 +3,11 @@ package com.sobarna.sobarnamovies.viewmodel
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sobarna.sobarnamovies.sources.MovieAndShowRepository
+import com.sobarna.sobarnamovies.utils.Injection
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory private constructor(private val repository: MovieRepository) : ViewModelProvider.NewInstanceFactory(){
+class ViewModelFactory private constructor(private val repository: MovieAndShowRepository) : ViewModelProvider.NewInstanceFactory(){
 
     companion object{
         @Volatile

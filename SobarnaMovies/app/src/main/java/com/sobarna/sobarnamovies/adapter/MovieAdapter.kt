@@ -17,7 +17,6 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
         notifyDataSetChanged()
         movieList.addAll(itemList)
     }
-  //  }
 
    inner class ShowViewHolder(private val binding: MovieListBinding):RecyclerView.ViewHolder(binding.root) {
        fun bind(movie: Result){
@@ -33,17 +32,6 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
                tvTitleList.text = movie.title
                tvReleaseDateList.text = movie.release_date
            }
-/*
-           with(binding){
-               Glide.with(itemView.context)
-                   .load(movie.avatarMovie)
-                   .apply(RequestOptions().override(magicNumber,magicNumber))
-                   .into(ivMovieList)
-               tvTitleList.text = movie.movieTitle
-               tvReleaseDateList.text = movie.releaseDateMovie
-           }
-
- */
        }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
@@ -58,7 +46,6 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
       holder.itemView.setOnClickListener {
 
           val moveIntent = Result(
-                  data.genre_ids,
                   data.id,
                   data.original_language,
                   data.original_title,
@@ -70,27 +57,11 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
                   data.vote_average,
                   data.vote_count
           )
-
-
-          //val moveIntent = SobanaMovies(
-            //      data.avatarMovie,
-              //    data.movieTitle,
-                //  data.releaseDateMovie,
-                 // data.genreMovie,
-                 // data.overviewMovie,
-                 // data.directorMovie
-
-          //)
-
-
           val intent = Intent(it.context, DetailActivity::class.java)
           intent.putExtra(DetailActivity.EXTRA_DATA,moveIntent)
           it.context.startActivity(intent)
       }
-
-
   }
-
   override fun getItemCount(): Int {
       return movieList.size
   }
