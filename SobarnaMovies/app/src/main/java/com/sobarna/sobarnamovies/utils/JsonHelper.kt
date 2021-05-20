@@ -84,7 +84,8 @@ class JsonHelper(private val context: Context) {
                 val vote = movie.getDouble("vote_average")
                 val count = movie.getInt("vote_count")
 
-                val movieResponse = MovieResponse(id,
+                val movieResponse = MovieResponse(
+                    id,
                     language,
                     originalTitle,
                     overview,
@@ -101,6 +102,46 @@ class JsonHelper(private val context: Context) {
             e.printStackTrace()
         }
         return movieList
+    }
+
+
+    fun loadModule(courseId: Int): List<MovieResponse> {
+        var list = ArrayList<MovieResponse>()
+        try {
+            val responseObject = JSONObject(parsingFileToString("MoviesResponses.json").toString())
+            val listArray = responseObject.getJSONArray("results")
+            for(i in 0 until listArray.length()){
+                val course = listArray.getJSONObject(i)
+
+                val id = course.getInt("id")
+                val title = course.getString("title")
+                val overview = course.getString("overview")
+                val poster = course.getString("poster_path")
+                val releaseDate = course.getString("release_date")
+                val language = course.getString("original_language")
+                val originalTitle = course.getString("original_title")
+                val popularity = course.getDouble("popularity")
+                val vote = course.getDouble("vote_average")
+                val count = course.getInt("vote_count")
+
+                val movieResponse = MovieResponse(id,
+                    language,
+                    originalTitle,
+                    overview,
+                    popularity,
+                    poster,
+                    releaseDate,
+                    title,
+                    vote,
+                    count
+                )
+                list.add(movieResponse)
+            }
+
+        }catch (e:JSONException){
+            e.printStackTrace()
+        }
+        return listOf(list[courseId])
     }
 
 

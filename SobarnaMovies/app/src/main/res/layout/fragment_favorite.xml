@@ -6,33 +6,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.FavoriteFragment">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tlFavoriteList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabTextColor="@color/white" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabTextColor="@color/white" />
 
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/vpFavoriteList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="49dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tlFavoriteList" />
-
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="49dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tlFavorite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -2,30 +2,38 @@ package com.sobarna.sobarnamovies.sources
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.sobarna.sobarnamovies.model.MovieResponse
-import com.sobarna.sobarnamovies.model.Result
-import com.sobarna.sobarnamovies.model.ResultX
-import com.sobarna.sobarnamovies.model.ShowResponse
+import com.sobarna.sobarnamovies.model.*
+import com.sobarna.sobarnamovies.percobaan.*
 
-class MovieAndShowRepository private constructor(private val remoteDataSource: RemoteDataSource):
+class MovieAndShowRepository private constructor(
+    private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors
+):
     MovieAndShowSource {
 
     companion object{
         @Volatile
         private var instance: MovieAndShowRepository? = null
 
-        fun getInstance(remoteDataSource: RemoteDataSource): MovieAndShowRepository =
+        fun getInstance(remoteDataSource: RemoteDataSource,localData: LocalDataSource, appExecutors: AppExecutors): MovieAndShowRepository =
                 instance ?: synchronized(this){
-                    instance ?: MovieAndShowRepository(remoteDataSource).apply { instance = this }
+                    instance ?: MovieAndShowRepository(remoteDataSource,localData,appExecutors).apply { instance = this }
                 }
     }
-    override fun getMovies(): LiveData<List<Result>> {
-        val movieResult = MutableLiveData<List<Result>>()
-        remoteDataSource.getMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMoviesReceived(movieResponse: List<MovieResponse>) {
-                val movieList = ArrayList<Result>()
-                for (response in movieResponse){
-                    val movie = Result(
+
+    override fun getMovies(): LiveData<Resource<List<Result>>> {
+        return object : NetworkBoundResource<List<Result>, List<MovieResponse>>(appExecutors) {
+            public override fun loadFromDB(): LiveData<List<Result>> =
+                localDataSource.getAllMovies()
+            override fun shouldFetch(data: List<Result>?): Boolean =
+                data == null || data.isEmpty()
+            public override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
+                remoteDataSource.getMovies()
+            public override fun saveCallResult(courseResponses: List<MovieResponse>) {
+                val courseList = ArrayList<Result>()
+                for (response in courseResponses) {
+                    val course = Result(
                         response.id,
                         response.original_language,
                         response.original_title,
@@ -35,15 +43,56 @@ class MovieAndShowRepository private constructor(private val remoteDataSource: R
                         response.release_date,
                         response.title,
                         response.vote_average,
-                        response.vote_count
+                        response.vote_count,
+                        false
                     )
-                    movieList.add(movie)
+                    courseList.add(course)
                 }
-                movieResult.postValue(movieList)
+
+                localDataSource.insertMovies(courseList)
             }
-        })
-        return movieResult
+        }.asLiveData()
     }
+
+    override fun getMoviesWithId(movieId: Int): LiveData<Resource<FavoMovie>> {
+        return object : NetworkBoundResource<FavoMovie, List<MovieResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<FavoMovie> {
+                return localDataSource.getMoviesWithId(movieId)
+            }
+
+            override fun shouldFetch(data: FavoMovie?): Boolean {
+                return data?.listResult == null || data. listResult.isEmpty()
+            }
+
+            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> {
+                return remoteDataSource.getMoviesById(movieId)
+            }
+
+            override fun saveCallResult(data: List<MovieResponse>) {
+                val movieList = ArrayList<Result>()
+                for(response in data){
+                    val entity = Result(
+                        response.id,
+                        response.original_language,
+                        response.original_title,
+                        response.overview,
+                        response.popularity,
+                        response.poster_path,
+                        response.release_date,
+                        response.title,
+                        response.vote_average,
+                        response.vote_count,
+                        false
+                    )
+
+                    movieList.add(entity)
+                }
+
+                localDataSource.insertMovies(movieList)
+            }
+        }.asLiveData()
+    }
+
     override fun getShows(): LiveData<List<ResultX>> {
         val showResult = MutableLiveData<List<ResultX>>()
         remoteDataSource.getShows(object : RemoteDataSource.LoadShowCallback {
@@ -59,4 +108,13 @@ class MovieAndShowRepository private constructor(private val remoteDataSource: R
         })
         return showResult
     }
+
+    override fun setFavoriteMovie(movie: Result, state: Boolean) =
+        appExecutors.diskIO().execute { localDataSource.setFavoriteMovies(movie,state) }
+
+
+    override fun getBookmarkedCourses(): LiveData<List<Result>> =
+        localDataSource.getBookmarkedCourses()
+
 }
+

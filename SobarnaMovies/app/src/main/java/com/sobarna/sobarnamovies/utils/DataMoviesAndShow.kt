@@ -287,7 +287,7 @@ object DataMoviesAndShow {
     }
 
 
-
+/*
 
     fun getMoviesData():ArrayList<Result>{
 
@@ -1129,5 +1129,7 @@ object DataMoviesAndShow {
 
 
 
+
+ */
 
 }

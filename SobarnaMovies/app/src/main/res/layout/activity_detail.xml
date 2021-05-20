@@ -7,14 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="60dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_baseline_favorite_24"
+        android:focusable="true"
+        android:contentDescription="@string/fab_transformation_scrim_behavior" />
+
+    <ProgressBar
+        android:id="@+id/pbDetail"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_margin="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
             android:orientation="vertical"
             app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,13 +68,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="270dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="@font/autour_one"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 tools:text="Robin Hood" />
 
             <TextView
@@ -66,12 +92,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="380dp"
+                android:layout_marginEnd="8dp"
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 tools:text="Popularity = 20040" />
 
             <TextView
@@ -84,12 +110,12 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:id="@+id/tvOverviewDetail"
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="460dp"
+                android:layout_marginEnd="8dp"
                 android:textColor="@color/black"
                 tools:text="A war-hardened Crusader and his Moorish commander mount an audacious revolt against the corrupt English crown." />
 
@@ -97,20 +123,20 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_baseline_star_24"
                 android:layout_marginTop="600dp"
-                android:contentDescription="@string/sobarna_movies" />
+                android:contentDescription="@string/sobarna_movies"
+                android:src="@drawable/ic_baseline_star_24" />
 
             <TextView
-                android:layout_gravity="center_horizontal"
+                android:id="@+id/tvAverageDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvAverageDetail"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="640dp"
-                tools:text= "10"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tools:text="10" />
 
         </androidx.cardview.widget.CardView>
 

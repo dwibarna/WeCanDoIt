@@ -4,8 +4,10 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.sobarna.sobarnamovies.model.*
+import com.sobarna.sobarnamovies.percobaan.Resource
 import com.sobarna.sobarnamovies.retrofitapi.ApiRetrofit
 import com.sobarna.sobarnamovies.retrofitapi.RetrofitClient
 import com.sobarna.sobarnamovies.sources.MovieAndShowRepository
@@ -18,9 +20,53 @@ class MovieAndShowViewModel(private val movieRepository: MovieAndShowRepository)
     private val mutableLiveShow = MutableLiveData<ArrayList<TvShow>>()
     private val mutableLiveMovie = MutableLiveData<ArrayList<Movies>>()
 
+    fun getMutable(): LiveData<Resource<List<Result>>> = movieRepository.getMovies()
+
+    private val movieId = MutableLiveData<Int>()
+
+    fun setSelectedMovie(movId: Int){
+        this.movieId.value = movId
+    }
+
+    var thisData : LiveData<Resource<FavoMovie>> = Transformations.switchMap(movieId){ corseId ->
+        movieRepository.getMoviesWithId(corseId)
+    }
+
+   // fun liveData() : LiveData<Resource<Result>>?{
+    //    return movieId.value?.let { movieRepository.getMoviesWithId(it) }
+   // }
+
+    //var liveingData : LiveData<Resource<Result>>? = movieId.value?.let {
+     //   movieRepository.getMoviesWithId(
+      //      it
+       // )
+   // }
+ //   fun getMutableCheck(): LiveData<Resource<Result>> = movieRepository.getMoviesWithId(movieId)
+
+
+   // var liveData: LiveData<Resource<List<Result>>> = movieRepository.getMoviesWithId()
+
+
+    fun setFavorite(){
+        val resource = thisData.value
+
+        if (resource != null){
+            val thisis = resource.data
+
+            if (thisis != null){
+                val state = !thisis.result.favorite
+                movieRepository.setFavoriteMovie(thisis.result, state)
+            }
+        }
+    }
+
+
+    /*
     fun getMutable(): LiveData<List<Result>>{
         return movieRepository.getMovies()
          }
+
+     */
 
     fun getMutableShow():LiveData<List<ResultX>>{
         return movieRepository.getShows()
@@ -53,5 +99,10 @@ class MovieAndShowViewModel(private val movieRepository: MovieAndShowRepository)
         })
         return ArrayList()
     }
+
+        fun getBookmarks(): LiveData<List<Result>> {
+            return movieRepository.getBookmarkedCourses()
+        }
+
 
 }

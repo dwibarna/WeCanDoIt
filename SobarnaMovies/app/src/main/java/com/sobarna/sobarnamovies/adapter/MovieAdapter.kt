@@ -10,15 +10,17 @@ import com.sobarna.sobarnamovies.databinding.MovieListBinding
 import com.sobarna.sobarnamovies.model.Result
 import com.sobarna.sobarnamovies.view.DetailActivity
 
-class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapter<MovieAdapter.ShowViewHolder>() {
+class MovieAdapter :RecyclerView.Adapter<MovieAdapter.ShowViewHolder>() {
 
-    fun setData(itemList:List<Result>){
-        movieList.clear()
-        notifyDataSetChanged()
-        movieList.addAll(itemList)
+    private var movieList = ArrayList<Result>()
+
+    fun setData(itemList:List<Result>?){
+        if(itemList == null) return
+        this.movieList.clear()
+        this.movieList.addAll(itemList)
     }
 
-   inner class ShowViewHolder(private val binding: MovieListBinding):RecyclerView.ViewHolder(binding.root) {
+    class ShowViewHolder(private val binding: MovieListBinding):RecyclerView.ViewHolder(binding.root) {
        fun bind(movie: Result){
            val magicNumber = 100
            val imageUrl = "https://image.tmdb.org/t/p/w500"
@@ -31,6 +33,28 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
                        .into(ivMovieList)
                tvTitleList.text = movie.title
                tvReleaseDateList.text = movie.release_date
+/*
+               itemView.setOnClickListener {
+                   val moveIntent = Result(
+                       movie.id,
+                       movie.original_language,
+                       movie.original_title,
+                       movie.overview,
+                       movie.popularity,
+                       movie.poster_path,
+                       movie.release_date,
+                       movie.title,
+                       movie.vote_average,
+                       movie.vote_count,
+                       movie.favorite
+                   )
+                   val intent = Intent(itemView.context,DetailActivity::class.java)
+                   intent.putExtra(DetailActivity.EXTRA_COURSE,moveIntent)
+                   itemView.context.startActivity(intent)
+               }
+
+ */
+
            }
        }
     }
@@ -40,27 +64,30 @@ class MovieAdapter(private val movieList: ArrayList<Result>):RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
-        holder.bind(movieList[position])
+        val hold = movieList[position]
+        holder.bind(hold)
+
         val data =  movieList[position]
 
-      holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
 
-          val moveIntent = Result(
-                  data.id,
-                  data.original_language,
-                  data.original_title,
-                  data.overview,
-                  data.popularity,
-                  data.poster_path,
-                  data.release_date,
-                  data.title,
-                  data.vote_average,
-                  data.vote_count
-          )
-          val intent = Intent(it.context, DetailActivity::class.java)
-          intent.putExtra(DetailActivity.EXTRA_DATA,moveIntent)
-          it.context.startActivity(intent)
-      }
+            val moveIntent = Result(
+                data.id,
+                data.original_language,
+                data.original_title,
+                data.overview,
+                data.popularity,
+                data.poster_path,
+                data.release_date,
+                data.title,
+                data.vote_average,
+                data.vote_count,
+                data.favorite
+            )
+            val intent = Intent(it.context, DetailActivity::class.java)
+            intent.putExtra(DetailActivity.EXTRA_COURSE,moveIntent)
+            it.context.startActivity(intent)
+        }
   }
   override fun getItemCount(): Int {
       return movieList.size
