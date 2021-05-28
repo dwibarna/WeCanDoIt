@@ -1,5 +1,6 @@
 package com.sobarna.goodapp.core.data.source.remote
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +8,11 @@ import com.sobarna.goodapp.core.data.source.remote.network.ApiResponse
 import com.sobarna.goodapp.core.data.source.remote.network.ApiService
 import com.sobarna.goodapp.core.data.source.remote.response.ListMovieResponse
 import com.sobarna.goodapp.core.data.source.remote.response.MovieResponse
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,12 +28,27 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
             }
     }
 
-    fun getAllMovie(): LiveData<ApiResponse<List<MovieResponse>>> {
-        val resultData = MutableLiveData<ApiResponse<List<MovieResponse>>>()
+    @SuppressLint("CheckResult")
+    fun getAllMovie(): Flowable<ApiResponse<List<MovieResponse>>> {
+        val resultData = PublishSubject.create<ApiResponse<List<MovieResponse>>>()
 
         //get data from remote api
         val client = apiService.getListMovie()
 
+        client
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({response ->
+                val dataArray = response.results
+                resultData.onNext(if(dataArray.isNotEmpty()) ApiResponse.Success(dataArray) else ApiResponse.Empty)
+            },{error ->
+                resultData.onNext(ApiResponse.Error(error.message.toString()))
+                Log.e("Error RemoteDataSource",error.toString())
+            })
+
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+/*
         client.enqueue(object : Callback<ListMovieResponse> {
             override fun onResponse(
                 call: Call<ListMovieResponse>,
@@ -44,5 +65,8 @@ class RemoteDataSource private constructor(private val apiService: ApiService) {
         })
 
         return resultData
+    }
+
+ */
     }
 }
