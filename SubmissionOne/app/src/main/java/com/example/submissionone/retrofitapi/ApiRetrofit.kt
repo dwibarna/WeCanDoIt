@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface ApiRetrofit {
   //  https://api.themoviedb.org/3/movie/top_rated?api_key=338e9f156f9f274bed38580ad4810b0f
     @GET("users")
-    @Headers("Authorization: token efb84bdbe1810822147b62f5eaf5248d6301d5ba")
+    @Headers("Authorization: token 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")
     fun getPosts(): Call<ArrayList<User>>
     @GET("users/{username}")
     @Headers("Authorization: token efb84bdbe1810822147b62f5eaf5248d6301d5ba")

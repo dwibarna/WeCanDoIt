@@ -9,6 +9,5 @@ data class User(
         @SerializedName("avatar_url")
         var avatarUser:String="",
         var id: Int? = null
-
 )
 
