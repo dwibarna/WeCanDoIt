@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sobarna.wecandoit.core.ui.ViewModelFactory
 import com.sobarna.wecandoit.core.ui.adapter.MovieAdapter
 import com.sobarna.wecandoit.databinding.FragmentFavoriteBinding
 import com.sobarna.wecandoit.viewmodel.FavoriteViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class FavoriteFragment : Fragment() {
 
-    private lateinit var favoriteViewModel: FavoriteViewModel
+    private  val favoriteViewModel: FavoriteViewModel by viewModel()
 
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
@@ -40,10 +40,6 @@ class FavoriteFragment : Fragment() {
                 intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
-
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            favoriteViewModel = ViewModelProvider(this, factory)[FavoriteViewModel::class.java]
-
             favoriteViewModel.useCase.observe(viewLifecycleOwner, { dataTourism ->
                 movieAdapter.setData(dataTourism)
             })

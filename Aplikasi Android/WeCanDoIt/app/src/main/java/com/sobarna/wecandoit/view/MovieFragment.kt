@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sobarna.wecandoit.core.data.Resource
-import com.sobarna.wecandoit.core.ui.ViewModelFactory
 import com.sobarna.wecandoit.core.ui.adapter.MovieAdapter
 import com.sobarna.wecandoit.databinding.FragmentMovieBinding
 import com.sobarna.wecandoit.viewmodel.HomeViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class MovieFragment : Fragment() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModel()
 
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
@@ -41,10 +41,6 @@ class MovieFragment : Fragment() {
                 intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
                 startActivity(intent)
             }
-
-            val factory = ViewModelFactory.getInstance(requireActivity())
-            homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
-
             homeViewModel.useCase.observe(viewLifecycleOwner, { movie ->
                 if (movie != null) {
                     when (movie) {

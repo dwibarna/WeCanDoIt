@@ -1,16 +1,15 @@
 package com.sobarna.wecandoit.view
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.sobarna.wecandoit.R
 import com.sobarna.wecandoit.core.domain.model.Movie
-import com.sobarna.wecandoit.core.ui.ViewModelFactory
 import com.sobarna.wecandoit.databinding.ActivityDetailBinding
 import com.sobarna.wecandoit.viewmodel.DetailViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 
@@ -20,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var detailTourismViewModel: DetailViewModel
+    private val detailTourismViewModel: DetailViewModel by viewModel()
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +28,6 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
        // setSupportActionBar(binding.toolbar)
-
-        val factory = ViewModelFactory.getInstance(this)
-        detailTourismViewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
         val detailMovie = intent.getParcelableExtra<Movie>(EXTRA_DATA)
         showDetailTourism(detailMovie)
