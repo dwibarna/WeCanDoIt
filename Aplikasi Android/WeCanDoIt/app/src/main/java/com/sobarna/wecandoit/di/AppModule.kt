@@ -1,7 +1,8 @@
 package com.sobarna.wecandoit.di
 
-import com.sobarna.wecandoit.core.domain.usecase.MovieInteract
-import com.sobarna.wecandoit.core.domain.usecase.MovieUseCase
+
+import com.sobarna.wecandoit.domain.usecase.MovieInteract
+import com.sobarna.wecandoit.domain.usecase.MovieUseCase
 import com.sobarna.wecandoit.viewmodel.DetailViewModel
 import com.sobarna.wecandoit.viewmodel.FavoriteViewModel
 import com.sobarna.wecandoit.viewmodel.HomeViewModel

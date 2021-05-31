@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.sobarna.wecandoit.R
-import com.sobarna.wecandoit.core.domain.model.Movie
 import com.sobarna.wecandoit.databinding.ActivityDetailBinding
+import com.sobarna.wecandoit.domain.model.Movie
 import com.sobarna.wecandoit.viewmodel.DetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.DateFormat

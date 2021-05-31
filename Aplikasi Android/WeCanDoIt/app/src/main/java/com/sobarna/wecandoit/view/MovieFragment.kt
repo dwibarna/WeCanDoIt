@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sobarna.wecandoit.core.data.Resource
-import com.sobarna.wecandoit.core.adapter.MovieAdapter
+
+import com.sobarna.wecandoit.data.Resource
 import com.sobarna.wecandoit.databinding.FragmentMovieBinding
 import com.sobarna.wecandoit.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,7 +35,7 @@ class MovieFragment : Fragment() {
 
         if (activity != null) {
 
-            val movieAdapter = MovieAdapter()
+            val movieAdapter = com.sobarna.wecandoit.adapter.MovieAdapter()
             movieAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)

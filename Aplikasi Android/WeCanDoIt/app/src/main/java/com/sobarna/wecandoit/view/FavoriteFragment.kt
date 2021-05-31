@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sobarna.wecandoit.core.adapter.MovieAdapter
 import com.sobarna.wecandoit.databinding.FragmentFavoriteBinding
 import com.sobarna.wecandoit.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,7 +32,7 @@ class FavoriteFragment : Fragment() {
 
         if (activity != null) {
 
-            val movieAdapter = MovieAdapter()
+            val movieAdapter = com.sobarna.wecandoit.adapter.MovieAdapter()
             movieAdapter.onItemClick = { selectedData ->
                 val intent = Intent(activity, DetailActivity::class.java)
                 intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
