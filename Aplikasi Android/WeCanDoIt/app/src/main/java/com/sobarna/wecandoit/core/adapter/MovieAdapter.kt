@@ -1,4 +1,4 @@
-package com.sobarna.wecandoit.core.ui.adapter
+package com.sobarna.wecandoit.core.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

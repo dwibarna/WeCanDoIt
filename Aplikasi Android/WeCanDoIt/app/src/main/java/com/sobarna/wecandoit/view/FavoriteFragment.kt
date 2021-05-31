@@ -6,9 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sobarna.wecandoit.core.ui.adapter.MovieAdapter
+import com.sobarna.wecandoit.core.adapter.MovieAdapter
 import com.sobarna.wecandoit.databinding.FragmentFavoriteBinding
 import com.sobarna.wecandoit.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

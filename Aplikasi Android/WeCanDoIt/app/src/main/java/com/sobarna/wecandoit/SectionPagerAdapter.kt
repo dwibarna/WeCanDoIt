@@ -1,4 +1,4 @@
-package com.sobarna.wecandoit.core.ui.adapter
+package com.sobarna.wecandoit
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sobarna.wecandoit.core.data.Resource
-import com.sobarna.wecandoit.core.ui.adapter.MovieAdapter
+import com.sobarna.wecandoit.core.adapter.MovieAdapter
 import com.sobarna.wecandoit.databinding.FragmentMovieBinding
 import com.sobarna.wecandoit.viewmodel.HomeViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
