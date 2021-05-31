@@ -1,7 +1,11 @@
 package com.sobarna.wecandoit
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -15,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         private val TAB_TITLES = intArrayOf(
             R.drawable.ic_baseline_home_24,
-            R.drawable.ic_favorite_black
+            R.drawable.ic_favorite_white
         )
     }
 
@@ -36,6 +40,19 @@ class MainActivity : AppCompatActivity() {
             tab.icon = resources.getDrawable(TAB_TITLES[position])
         }.attach()
         supportActionBar?.elevation = 0f
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.nav_dynamic){
+            val uri = Uri.parse("wecandoit://dynamic")
+            startActivity(Intent(Intent.ACTION_VIEW, uri))
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 }

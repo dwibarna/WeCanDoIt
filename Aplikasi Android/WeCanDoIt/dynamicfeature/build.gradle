@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.dynamic-feature'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
@@ -9,8 +9,16 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+
     defaultConfig {
-        applicationId "com.sobarna.wecandoit"
+        applicationId "com.sobarna.wecandoit.dynamicfeature"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -24,25 +32,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-
     }
-    buildFeatures {
-        viewBinding = true
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-    dynamicFeatures = [':dynamicfeature']
 }
 
 dependencies {
     implementation project(":core")
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":app")
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-
-
 }
