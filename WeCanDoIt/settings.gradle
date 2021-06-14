@@ -1,0 +1,4 @@
+rootProject.name = "WeCanDoIt"
+include ':app'
+include ':core'
+include ':dynamicfeature'
