@@ -1,3 +1,0 @@
-include ':consumersubmissionapp'
-include ':app'
-rootProject.name = "Submission One"
