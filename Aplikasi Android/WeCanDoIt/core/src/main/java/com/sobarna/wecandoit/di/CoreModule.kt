@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val databaseModule = module {
-    factory { get<MovieDatabase>().tourismDao() }
+    factory { get<MovieDatabase>().movieDao() }
     single {
         Room.databaseBuilder(
             androidContext(),

@@ -26,7 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:contentDescription="@string/app_name" />
 
         <TextView
             android:id="@+id/ivTitleItemList"
@@ -35,7 +36,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
 
-            android:text="The Indcridible Dwi Aji Sobarna"
+            android:text="@string/the_indcridible_dwi_aji_sobarna"
             android:textColor="#212121"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +50,7 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:textColor="#757575"
-            android:text="11-20-2031"
+            android:text="@string/_11_20_2031"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -31,17 +31,15 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-
             val movieAdapter = com.sobarna.wecandoit.adapter.MovieAdapter()
-            movieAdapter.onItemClick = { selectedData ->
+            movieAdapter.onItemClick = { favorite ->
                 val intent = Intent(activity, DetailActivity::class.java)
-                intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
+                intent.putExtra(DetailActivity.EXTRA_DATA, favorite)
                 startActivity(intent)
             }
-            favoriteViewModel.useCase.observe(viewLifecycleOwner, { dataTourism ->
-                movieAdapter.setData(dataTourism)
+            favoriteViewModel.useCase.observe(viewLifecycleOwner, { movie ->
+                movieAdapter.setData(movie)
             })
-
             with(binding.rvFavorite) {
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
@@ -49,7 +47,6 @@ class FavoriteFragment : Fragment() {
             }
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

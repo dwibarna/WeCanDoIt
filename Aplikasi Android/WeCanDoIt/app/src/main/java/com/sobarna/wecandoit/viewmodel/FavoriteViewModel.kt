@@ -6,6 +6,5 @@ import com.sobarna.wecandoit.domain.usecase.MovieUseCase
 
 
 class FavoriteViewModel(useCase: MovieUseCase) : ViewModel() {
-    //val useCase = useCase.getFavoriteMovie()
     val useCase = useCase.getFavoriteMovie().asLiveData()
 }

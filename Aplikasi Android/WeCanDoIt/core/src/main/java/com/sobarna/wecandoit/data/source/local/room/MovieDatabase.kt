@@ -7,7 +7,5 @@ import com.sobarna.wecandoit.data.source.local.entity.MovieEntity
 
 @Database(entities = [MovieEntity::class], version = 1, exportSchema = false)
 abstract class MovieDatabase : RoomDatabase() {
-
-    abstract fun tourismDao(): MovieDao
-
+    abstract fun movieDao(): MovieDao
 }

@@ -19,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private val detailTourismViewModel: DetailViewModel by viewModel()
+    private val viewModel: DetailViewModel by viewModel()
     private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,14 +27,12 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       // setSupportActionBar(binding.toolbar)
-
         val detailMovie = intent.getParcelableExtra<Movie>(EXTRA_DATA)
-        showDetailTourism(detailMovie)
+        showDetail(detailMovie)
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun showDetailTourism(movie: Movie?) {
+    private fun showDetail(movie: Movie?) {
         movie?.let {
 
             val oldDate = movie.release_date
@@ -60,27 +58,21 @@ class DetailActivity : AppCompatActivity() {
             binding.tvUserScoreDetail.text = userScore
             binding.tvOverViewDetail.text = overview
 
-          //  supportActionBar?.title = detailTourism.name
-          //  binding.content.tvDetailDescription.text = detailTourism.overview
-         //   Glide.with(this@DetailTourismActivity)
-         ////       .load(detailTourism.image)
-         //       .into(binding.ivDetailImage)
-
             var statusFavorite = movie.favorite
             setStatusFavorite(statusFavorite)
             binding.fabDetail.setOnClickListener {
                statusFavorite = !statusFavorite
-                detailTourismViewModel.setFavoriteTourism(movie, statusFavorite)
+                viewModel.setFavoriteMovie(movie, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }
-
-
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
         if (statusFavorite) {
-            binding.fabDetail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_white))
+            binding.fabDetail.setImageDrawable(ContextCompat.getDrawable(this,
+                R.drawable.ic_favorite_white
+            ))
         } else {
             binding.fabDetail.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_not_favorite_white))
         }

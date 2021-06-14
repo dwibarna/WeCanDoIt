@@ -46,35 +46,6 @@ class MovieRepository(
         return localDataSource.getFavoriteMovie().map {  asd ->
             DataMapper.mapEntitiesToDomain(asd) }
     }
-/*
-    override fun getAllMovies(): LiveData<Resource<List<Movie>>> =
-        object : NetworkBoundResource<List<Movie>, List<MovieResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<Movie>> {
-                return Transformations.map(localDataSource.getAllMovie()) {
-                    DataMapper.mapEntitiesToDomain(it)
-                }
-            }
-
-            override fun shouldFetch(data: List<Movie>?): Boolean = true
-
-            override fun createCall(): LiveData<ApiResponse<List<MovieResponse>>> =
-                remoteDataSource.getAllMovie()
-
-            override fun saveCallResult(data: List<MovieResponse>) {
-                val movieList = DataMapper.mapResponsesToEntities(data)
-                localDataSource.insertMovie(movieList)
-            }
-        }.asLiveData()
-
- */
-/*
-    override fun getFavoriteMovie(): LiveData<List<Movie>> {
-        return Transformations.map(localDataSource.getFavoriteMovie()) {
-            DataMapper.mapEntitiesToDomain(it)
-        }
-    }
-
- */
 
     override fun setFavoriteMovie(movie: Movie, state: Boolean) {
         val tourismEntity = DataMapper.mapDomainToEntity(movie)

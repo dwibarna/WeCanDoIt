@@ -34,7 +34,6 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
         val data = listData[position]
         holder.bind(data)
     }
-
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ListItemBinding.bind(itemView)
         @SuppressLint("SimpleDateFormat")
@@ -44,7 +43,6 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
             val dateFormat: DateFormat = SimpleDateFormat("dd MMMM yyyy")
             val df = SimpleDateFormat("yyyy-MM-dd")
             val newDate = dateFormat.format(df.parse(oldDate)!!)
-
             with(binding) {
                 Glide.with(itemView.context)
                     .load(imageUrl)
@@ -53,7 +51,6 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
                 binding.ivDateList.text = newDate
             }
         }
-
         init {
             binding.root.setOnClickListener {
                 onItemClick?.invoke(listData[adapterPosition])
